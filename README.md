@@ -3,13 +3,14 @@
 - Order Food
 - Delivery
 
-Angular2: https://angular.io
-Bootstrap Component: https://valor-software.com/ng2-bootstrap/#/
+## Dependencies
+* Angular2: https://angular.io
+* Bootstrap Component: https://valor-software.com/ng2-bootstrap/#/
 
 ## Install node and npm
 
-install node `v4.x.x`
-install npm `3.x.x`
+install node `v4.x.x`.
+install npm `3.x.x`.
 
 ## Install npm packages
 
@@ -22,8 +23,8 @@ npm start
 
 ## Start Editing
 
-Web start in index.html
-Code files are in /src
+Web start in index.html.
+Code files are in /src.
 
 ### npm scripts
 
