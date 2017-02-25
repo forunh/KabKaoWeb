@@ -1,12 +1,17 @@
-<div class="center">
+<!--login page-->
+<div *ngIf="!isLogin" class="center">
     <span class="square">
         <h1>KABKAO</h1>
         <div>
             <p>Order Food Online & delivery</p>
             <br>
             <br>
-            <button type="button" class="btn btn-primary">Sign Up</button>
-            <button type="button" class="btn btn-warning marleft">Sign In</button>
+            <button type="button" class="btn btn-primary" >Sign Up</button>
+            <button type="button" class="btn btn-warning marleft" (click)="isLogin = true">Sign In</button>
         </div>
     </span>
+</div>
+<!--homepage-->
+<div *ngIf="isLogin">
+    <menu-bar></menu-bar>
 </div>

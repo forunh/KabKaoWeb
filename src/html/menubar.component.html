@@ -1,0 +1,17 @@
+<div class="bar">
+    this is MenuBarComponent
+    <img class="pad5" src="https://image.flaticon.com/icons/svg/308/308833.svg" (click)="childModal.showChildModal()" style="cursor: pointer;width:6%;height:6%; ">
+    <modal #childModal [title]="OrderTitle">
+       <div>
+        Order KabKao
+        <br>
+        >User
+        <br>
+        >Address
+        <br>
+        >Menu
+        <br>
+        Price:
+       </div>
+    </modal>
+</div>
