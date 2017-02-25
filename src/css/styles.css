@@ -3,6 +3,10 @@ h1 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 300%;
 }
+.logoSmall{
+  color: #f7d08a;
+  font-size: 200%
+}
 .square{
   font-size: 25px;
   color: white;
@@ -19,22 +23,19 @@ h1 {
 }
 .bar{
   background-color: #5b5941;
-  color: wheat;
+  color: white;
   padding: 10px;
   width: 100%
 }
 .pad10{
   padding: 10px
 }
-.pad5{
-  padding: 5px
+.padleft5{
+  padding-left: 5px
 }
 .marleft{
       margin-left: 10px;
 
-}
-.modal{
-  /*color: black*/
 }
 
 .color{
