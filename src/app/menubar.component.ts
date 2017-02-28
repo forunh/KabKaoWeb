@@ -5,5 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: '../html/menubar.component.html',
 })
 export class MenuBarComponent  { 
-  OrderTitle = "Order"
+  OrderTitle = "Order";
+  isOrder = false;
 }

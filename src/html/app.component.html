@@ -13,5 +13,6 @@
 </div>
 <!--homepage-->
 <div *ngIf="isLogin">
-    <menu-bar></menu-bar>
+    <menu-bar #menubar></menu-bar>
+    <body-app [isOrder]="menubar.isOrder"></body-app>
 </div>

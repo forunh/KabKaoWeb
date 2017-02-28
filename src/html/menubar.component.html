@@ -4,15 +4,13 @@
     <img class="padleft5" src="https://image.flaticon.com/icons/svg/308/308833.svg" (click)="childModal.showChildModal()" style="cursor: pointer;width:40px;height:40px; ">
     <modal #childModal [title]="OrderTitle">
        <div>
-        Order KabKao
+        Menu
         <br>
-        >User
+        Total
         <br>
-        >Address
-        <br>
-        >Menu
-        <br>
-        Price:
+       <button type="button" class="btn btn-primary" (click)="isOrder=true; childModal.hideChildModal();">Checkout</button>
+        
        </div>
+
     </modal>
 </div>
