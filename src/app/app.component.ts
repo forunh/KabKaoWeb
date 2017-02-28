@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: '../html/app.component.html',
 })
 export class AppComponent  { 
-  name = 'KabKao'; 
+  name = 'KabKao';
   IsLogin = false;
 }

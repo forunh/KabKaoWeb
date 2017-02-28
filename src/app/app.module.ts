@@ -8,10 +8,11 @@ import { ModalComponent } from './modal.component';
 import { MenuBarComponent } from './menubar.component';
 import { BodyComponent } from './body.component';
 import { OrderComponent } from './order.component';
+import { SignUpComponent } from './sign_up.component';
 
 @NgModule({
   imports:      [ BrowserModule ,CollapseModule.forRoot(),ModalModule.forRoot()],
-  declarations: [ AppComponent ,CollapseComponent ,ModalComponent ,MenuBarComponent, BodyComponent ,OrderComponent],
+  declarations: [ AppComponent ,CollapseComponent ,ModalComponent ,MenuBarComponent, BodyComponent ,OrderComponent, SignUpComponent],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

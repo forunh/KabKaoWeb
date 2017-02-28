@@ -6,7 +6,7 @@
             <p>Order Food Online & delivery</p>
             <br>
             <br>
-            <button type="button" class="btn btn-primary" >Sign Up</button>
+            <button type="button" class="btn btn-primary" (click)="signUpModal.showChildModal()">Sign Up</button>
             <button type="button" class="btn btn-warning marleft" (click)="isLogin = true">Sign In</button>
         </div>
     </span>
@@ -16,3 +16,8 @@
     <menu-bar #menubar></menu-bar>
     <body-app [isOrder]="menubar.isOrder"></body-app>
 </div>
+
+<!--signup modal-->
+<modal #signUpModal [title]="signup.signUpTitle">
+    <sign-up #signup></sign-up>
+</modal> 
