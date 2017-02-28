@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'sign-up',
@@ -6,4 +6,5 @@ import { Component } from '@angular/core';
 })
 export class SignUpComponent {
    signUpTitle = 'Sign Up';
+   @Input() test: String;
 }
