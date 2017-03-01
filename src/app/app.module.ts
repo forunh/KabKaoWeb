@@ -13,12 +13,13 @@ import { OrderComponent } from './order.component';
 import { SignUpComponent } from './sign_up.component';
 
 import { ExampleService } from './service/example.service';
+import { SignUpService } from './service/signup.service';
 
 @NgModule({
   imports:      [ BrowserModule,HttpModule,FormsModule,JsonpModule ,CollapseModule.forRoot(),ModalModule.forRoot()],
   declarations: [ AppComponent ,CollapseComponent ,ModalComponent ,MenuBarComponent, BodyComponent ,OrderComponent, SignUpComponent],
   bootstrap:    [ AppComponent ],
-  providers: [ExampleService],
+  providers:    [ ExampleService, SignUpService],
 
 })
 export class AppModule { }
