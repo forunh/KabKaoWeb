@@ -1,0 +1,16 @@
+<div class="bar">
+  <span class="logoSmall">KABKAO</span>
+  this is MenuBarComponent
+  <img class="padleft5" src="https://image.flaticon.com/icons/svg/308/308833.svg" (click)="childModal.showChildModal()" style="cursor: pointer;width:40px;height:40px; ">
+  <app-modal #childModal [title]="OrderTitle">
+    <div>
+      Menu
+      <br>
+      Total
+      <br>
+      <button type="button" class="btn btn-primary" (click)="isOrder=true; childModal.hideChildModal();">Checkout</button>
+
+    </div>
+
+  </app-modal>
+</div>

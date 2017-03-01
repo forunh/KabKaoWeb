@@ -1,17 +1,35 @@
-import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { CollapseModule,ModalModule } from 'ng2-bootstrap/ng2-bootstrap'
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
 
-import { AppComponent }  from './app.component';
-import { CollapseComponent} from './collapse.component';
-import { ModalComponent } from './modal.component';
-import { MenuBarComponent } from './menubar.component';
-import { BodyComponent } from './body.component';
-import { OrderComponent } from './order.component';
+import {AppComponent} from './app.component';
+import {CollapseComponent} from './collapse/collapse.component';
+
+import {CollapseModule, ModalModule} from 'ng2-bootstrap';
+import {OrderComponent} from './order/order.component';
+import {MenubarComponent} from './menubar/menubar.component';
+import {ModalComponent} from './modal/modal.component';
+import {BodyComponent} from './body/body.component'
 
 @NgModule({
-  imports:      [ BrowserModule ,CollapseModule.forRoot(),ModalModule.forRoot()],
-  declarations: [ AppComponent ,CollapseComponent ,ModalComponent ,MenuBarComponent, BodyComponent ,OrderComponent],
-  bootstrap:    [ AppComponent ]
+    declarations: [
+        AppComponent,
+        CollapseComponent,
+        OrderComponent,
+        MenubarComponent,
+        ModalComponent,
+        BodyComponent
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        CollapseModule.forRoot(),
+        ModalModule.forRoot(),
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
