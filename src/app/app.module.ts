@@ -12,6 +12,8 @@ import {MenubarComponent} from './menubar/menubar.component';
 import {ModalComponent} from './modal/modal.component';
 import {BodyComponent} from './body/body.component'
 
+import {OrderService} from './service/order.service';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -28,7 +30,7 @@ import {BodyComponent} from './body/body.component'
         CollapseModule.forRoot(),
         ModalModule.forRoot(),
     ],
-    providers: [],
+    providers: [OrderService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
