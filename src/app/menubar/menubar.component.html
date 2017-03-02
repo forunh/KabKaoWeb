@@ -1,12 +1,27 @@
 <div class="bar">
   <span class="logoSmall">KABKAO</span>
-  this is MenuBarComponent
   <img class="padleft5" src="https://image.flaticon.com/icons/svg/308/308833.svg" (click)="childModal.showChildModal()" style="cursor: pointer;width:40px;height:40px; ">
   <app-modal #childModal [title]="OrderTitle">
     <div>
-      Menu
+      <h3>Menu</h3>
+       <table>
+        <tr>
+          <th>Menu</th>
+          <th>Price</th>
+          <th>Quantity</th>
+        </tr>
+        <tr *ngFor="let menuList of menuLists ">
+          <td>{{menuList.name}}</td>
+          <td>{{menuList.price}}</td>
+          <td>{{menuList.quantity}}</td>
+        </tr>
+      </table>
       <br>
-      Total
+      <h3>Total</h3>
+      Quantity: {{calTotalQuantity()}}
+      <br>
+      Price: {{calTotalPrice()}}
+      <br>
       <br>
       <button type="button" class="btn btn-primary" (click)="isOrder=true; childModal.hideChildModal();">Checkout</button>
 

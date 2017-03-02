@@ -1,18 +1,80 @@
-<div>
+<div *ngIf="!isOrderComplete" class="pad-left">
   <h3>User</h3>
-  <br>
+  <div class="pad-left">
+    <br>
+  </div>
   <h3>Address</h3>
+      <div class="pad-left">
+        {{lat}},{{lng}}
+        <br>
+        <button type="button" class="btn btn-primary" (click)="mapModal.showChildModal()" >Select Address</button>
+      </div>
   <br>
   <h3>Menu</h3>
-  <br>
-  <br>
-  <br>
-  Menus Price:
-  <br>
-  Delivery Price:
-  <br>
-  Total Price:
-  <br>
-  <button type="button" class="btn btn-primary" >Confirm</button>
+  <div class="pad-left">
+      <table>
+        <tr>
+          <th>Menu</th>
+          <th>Price</th>
+          <th>Quantity</th>
+        </tr>
+        <tr *ngFor="let menuList of menuLists ">
+          <td>{{menuList.name}}</td>
+          <td>{{menuList.price}}</td>
+          <td>{{menuList.quantity}}</td>
+        </tr>
+      </table>
+      <br>
+      <strong>Quantity: </strong>{{calTotalQuantity()}}
+      <br>
+      <strong>Menu Price: </strong>{{calTotalMenuPrice()}}
+      <br>
+      <strong>Delivery Price: </strong>
+      <br>
+      <strong>Total Price: </strong>
+      <br>
+  </div>
+  <div class="pad">
+      <button type="button" class="btn btn-primary" (click)="createOrder()" [disabled]="!isSelectAddress">Confirm</button>
+  </div>
 
 </div>
+
+<div *ngIf="isOrderComplete" class="pad-left">
+  <h3>Order Detail</h3>
+  <strong>Order No.: </strong>{{orderListData.id}}
+  <br>
+  <strong>Order Time: </strong>{{toDateString(orderListData.createAt)}}  
+  <br>
+  <strong>Name: </strong>{{orderListData.userId}}
+  <br>  
+  <strong>Address: </strong>{{orderListData.address}}
+  <br>  
+  <strong>Menu:</strong>
+  <div>
+    <table>
+      <tr>
+        <th>Menu</th>
+        <th>Price</th>
+        <th>Quantity</th>
+      </tr>
+      <tr *ngFor="let orderMenu of orderMenuData ">
+        <td>{{orderMenu.menuId}}</td>
+        <td>300</td>
+        <td>{{orderMenu.quantity}}</td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <strong>Total Quantity: </strong>
+  <br>
+  <strong>Total Price: </strong>{{orderListData.price}}
+</div>
+
+<!--Map-->
+<app-modal #mapModal [title]="mapTitle">
+  <div>
+    <app-map #map></app-map>
+    <button class="btn btn-primary" (click)="selectAddress(map.lat,map.lng); mapModal.hideChildModal();" >OK</button>
+  </div>
+</app-modal>
