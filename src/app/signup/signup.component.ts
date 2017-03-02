@@ -1,7 +1,8 @@
-import { Component, Input, EventEmitter, Output} from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, Input, ViewChild, OnInit} from '@angular/core';
+import { FormBuilder, Validators, NgForm } from '@angular/forms';
 import { User } from '../model/user';
 import { SignUpService } from '../service/signup.service';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
     selector: 'app-signup',
@@ -11,7 +12,10 @@ export class SignUpComponent {
     user: User;
     isValid = false;
     signUpTitle = 'Sign Up';
-    @Output() closeModal: EventEmitter<boolean> = new EventEmitter();
+    @ViewChild('signUpModal')
+    private modalComponent: ModalComponent;
+    @ViewChild('signupForm')
+    private sigupForm: NgForm;
 
     username: string;
     password: string;
@@ -30,13 +34,19 @@ export class SignUpComponent {
             // this.signUpService.addUser(this.user).subscribe(data => {
             //     console.log(data);
             // });
+            this.sigupForm.resetForm();
             this.isValid = true;
         } else {
             this.isValid = false;
         }
     }
 
-    hideModal() {
-        this.closeModal.emit();
+    openModal() {
+        this.isValid = false;
+        this.modalComponent.showChildModal();
+    }
+
+    closeModal() {
+        this.modalComponent.hideChildModal();
     }
 }

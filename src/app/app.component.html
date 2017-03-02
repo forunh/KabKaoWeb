@@ -6,7 +6,7 @@
             <p>Order Food Online & delivery</p>
             <br>
             <br>
-            <button type="button" class="btn btn-primary" (click)="isSignUp = true">Sign Up</button>
+            <button type="button" class="btn btn-primary" (click)="sigup.openModal()">Sign Up</button>
             <button type="button" class="btn btn-warning marleft" (click)="isLogin = true">Sign In</button>
         </div>
     </span>
@@ -18,6 +18,5 @@
 </div>
 
 <!--signup modal-->
-<div *ngIf="isSignUp">   
-     <app-signup></app-signup>
-</div>
+<app-signup #sigup></app-signup>
+
