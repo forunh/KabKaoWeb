@@ -2,7 +2,7 @@
   <h3>User</h3>
   <br>
   <h3>Address</h3>
-   <button type="button" class="btn btn-primary" (click)="isMap = true" >Map</button>
+   <button type="button" class="btn btn-primary" (click)="mapModal.showChildModal()" >Map</button>
   <br>
   <h3>Menu</h3>
   <br>
@@ -18,6 +18,6 @@
 
 </div>
 <!--Map-->
-<div *ngIf="isMap">
-    <app-map></app-map>
-</div>
+<app-modal #mapModal [title]="mapTitle">
+  <app-map></app-map>
+</app-modal>

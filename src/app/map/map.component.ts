@@ -10,7 +10,7 @@ export class MapComponent implements OnInit {
   title: string = 'Select your destination';
    lat: number = 13.729052;
    lng: number = 100.775567;
-   zoom: number = 15;
+   zoom: number = 13;
    marker = 
 	  {
 		  lat: 13.729052,

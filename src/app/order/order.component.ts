@@ -11,6 +11,7 @@ export class OrderComponent implements OnInit {
 
   @Input() menuList:Array<Object>;
   orderList:OrderList;
+  mapTitle = "Address";
   constructor(private orderService: OrderService) { }
 
   ngOnInit() {
