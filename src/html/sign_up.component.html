@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+<form [hidden]="isValid" (ngSubmit)="onSubmit()" #signupForm="ngForm">
   <div class="form-group">
     <label for="username">Username</label>
     <input type="text" class="form-control" id="username" [(ngModel)]="username" #un="ngModel" placeholder="Username" [ngModelOptions]="{standalone: true}" required>
@@ -31,3 +31,13 @@
     <button type="submit" class="btn btn-primary">Submit</button>
   </div>
 </form>
+
+<!--modal complete-->
+<div [hidden]="!isValid" style="text-align: center">
+  <div>
+    SignUp is completed.
+  </div>
+  <div style="text-align: right"> 
+    <button class="btn btn-primary" (click)="hideModal()">OK</button>
+  </div>
+</div>

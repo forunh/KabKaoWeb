@@ -7,5 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent  { 
   name = 'KabKao';
-  IsLogin = false;
+  isLogin = false;
+  hideModal: any;
+
+  closeModal() {
+    this.hideModal();
+  }
 }

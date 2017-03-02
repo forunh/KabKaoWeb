@@ -19,5 +19,5 @@
 
 <!--signup modal-->
 <modal #signUpModal [title]="signup.signUpTitle">
-    <sign-up #signup></sign-up>
-</modal> 
+    <sign-up #signup (closeModal)="closeModal($event)"  hideModal="signUpModal.hideChildModal()"></sign-up>
+</modal>
