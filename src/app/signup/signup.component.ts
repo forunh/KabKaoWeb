@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild, OnInit} from '@angular/core';
-import { FormBuilder, Validators, NgForm } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { User } from '../model/user';
 import { SignUpService } from '../service/signup.service';
 import { ModalComponent } from '../modal/modal.component';
@@ -11,17 +11,16 @@ import { ModalComponent } from '../modal/modal.component';
 export class SignUpComponent {
     user: User;
     isValid = false;
+    hiddenCfPassMatch = true;
     signUpTitle = 'Sign Up';
     @ViewChild('signUpModal')
     private modalComponent: ModalComponent;
-    @ViewChild('signupForm')
-    private sigupForm: NgForm;
 
     username: string;
     password: string;
     confirm_password: string;
     firstname: string;
-    surname: string;
+    lastname: string;
     email: string;
     address: string;
 
@@ -30,13 +29,21 @@ export class SignUpComponent {
     onSubmit() {
         if (this.password === this.confirm_password) {
              // tslint:disable-next-line:max-line-length
-             this.user = new User(null, this.username, this.password, this.confirm_password, this.firstname, this.surname, this.email, this.address);
+             this.user = new User(null, this.username, this.password, this.confirm_password, this.firstname, this.lastname, this.email, this.address);
             // this.signUpService.addUser(this.user).subscribe(data => {
             //     console.log(data);
             // });
-            this.sigupForm.resetForm();
             this.isValid = true;
+            this.hiddenCfPassMatch = true;
+            this.username = '';
+            this.password = '';
+            this.confirm_password = '';
+            this.firstname = '';
+            this.lastname = '';
+            this.email = '';
+            this.address = '';
         } else {
+            this.hiddenCfPassMatch = false;
             this.isValid = false;
         }
     }
@@ -48,5 +55,9 @@ export class SignUpComponent {
 
     closeModal() {
         this.modalComponent.hideChildModal();
+    }
+
+    clearAlert() {
+        this.hiddenCfPassMatch = true;
     }
 }
