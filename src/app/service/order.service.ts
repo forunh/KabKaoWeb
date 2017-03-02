@@ -11,7 +11,7 @@ export class OrderService {
     constructor(private http:Http) {
     }
 
-     public addOrder(orderList){
+     public addOrderList(orderList){
         let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers: headers});
         let body = JSON.stringify(orderList);
@@ -20,8 +20,41 @@ export class OrderService {
     
     }
 
-    public getOrderByUserId(userId){
+    public getOrderListByUserId(userId){
         return this.http.get(this.url+'/orderList?userid='+userId).map((res:Response) => res.json());
 
     }
+
+    public getAllOrderList(){
+        return this.http.get(this.url+'/orderList').map((res:Response) => res.json());
+
+    }
+
+    public addOrderMenu(orderMenu){
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers: headers});
+        let body = JSON.stringify(orderMenu);
+        console.log(body)
+        return this.http.post(this.url+'/orderMenu', body, options).map((res:Response) => res.json());
+    
+    }
+
+    public addOrderMenuList(orderMenuList){
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers: headers});
+        let body = JSON.stringify(orderMenuList);
+        console.log(body)
+        return this.http.post(this.url+'/AddOrderMenu', body, options).map((res:Response) => res.json());
+    
+    }
+
+    public getOrderMenuByOrderId(orderId){
+        return this.http.get(this.url+'/orderMenu?orderid='+orderId).map((res:Response) => res.json());
+
+    }
+    public getAllOrderMenu(){
+        return this.http.get(this.url+'/orderMenu').map((res:Response) => res.json());
+
+    }
+    
 }

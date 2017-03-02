@@ -23,13 +23,13 @@
       <br>
   </div>
   <div class="pad">
-      <button type="button" class="btn btn-primary" (click)="createOrder()" >Confirm</button>
+      <button type="button" class="btn btn-primary" (click)="createOrder()" [disabled]="!isSelectAddress">Confirm</button>
   </div>
 
 </div>
 
-<div *ngIf="isOrderComplete">
-  <h3>Order Completed</h3>
+<div *ngIf="isOrderComplete" class="pad-left">
+  <h3>Order Detail</h3>
   <strong>Order No.: </strong>{{orderListData.id}}
   <br>
   <strong>Order Time: </strong>{{toDateString(orderListData.createAt)}}  
@@ -38,6 +38,22 @@
   <br>  
   <strong>Address: </strong>{{orderListData.address}}
   <br>  
+  <strong>Menu:</strong>
+  <div>
+    <table>
+      <tr>
+        <th>Menu</th>
+        <th>Price</th>
+        <th>Quantity</th>
+      </tr>
+      <tr *ngFor="let orderMenu of orderMenuData ">
+        <td>{{orderMenu.menuId}}</td>
+        <td>300</td>
+        <td>{{orderMenu.quantity}}</td>
+      </tr>
+    </table>
+  </div>
+  <br>
   <strong>Total Price: </strong>{{orderListData.price}}
 </div>
 
@@ -45,6 +61,6 @@
 <app-modal #mapModal [title]="mapTitle">
   <div>
     <app-map #map></app-map>
-    <button class="btn btn-primary" (click)="selectAddress(map.lat,map.lng); mapModal.hideChildModal();">OK</button>
+    <button class="btn btn-primary" (click)="selectAddress(map.lat,map.lng); mapModal.hideChildModal();" >OK</button>
   </div>
 </app-modal>

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OrderList } from '../model/orderList';
+import { OrderMenu } from '../model/orderMenu';
 import { OrderService } from '../service/order.service';
 
 @Component({
@@ -10,9 +11,11 @@ import { OrderService } from '../service/order.service';
 export class OrderComponent implements OnInit {
 
   @Input() menuList:Array<Object>;
+  
   orderListData:OrderList;
+  orderMenuData:Array<OrderMenu>;
   mapTitle = "Address";
-  isMap = false;
+  isSelectAddress = false;
   isOrderComplete = false; 
   lat:Number;
   lng:Number; 
@@ -26,18 +29,42 @@ export class OrderComponent implements OnInit {
         id:null,
         userId:235554,
         price:40500,
-        address:"1 Abc Rd., Abcr, BKK 12345",
+        address:this.lat.toString()+","+this.lng.toString(),
         createAt:null
       };
-      this.orderService.addOrder(orderList)
+      let menuList:Array<Object>=[
+        {
+          menuId:1,
+          quantity:1
+        },
+        {
+          menuId:2,
+          quantity:1
+        }
+      ];
+      this.orderService.addOrderList(orderList)
       .subscribe(
           data => {
             this.orderListData = data;
             this.isOrderComplete=true;
             // console.log(data)
+            let orderMenuList = {
+              orderId: data.id,
+              menuList: menuList
+            }
+             this.orderService.addOrderMenuList(orderMenuList)
+            .subscribe(
+                data => {
+                  this.orderMenuData = data
+                  console.log(data)
+                },
+                error => {
+                  console.error("Error adding orderMenu!")
+                }
+            );
           },
           error => {
-            console.error("Error adding order!")
+            console.error("Error adding orderList!")
           }
       );
   }
@@ -49,5 +76,6 @@ export class OrderComponent implements OnInit {
   private selectAddress(lat:Number,lng:Number){
     this.lat=lat;
     this.lng=lng;
+    this.isSelectAddress=true
   }
 }
