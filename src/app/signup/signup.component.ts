@@ -19,8 +19,8 @@ export class SignUpComponent {
     username: string;
     password: string;
     confirm_password: string;
-    firstname: string;
-    lastname: string;
+    first_name: string;
+    last_name: string;
     email: string;
     address: string;
 
@@ -28,20 +28,20 @@ export class SignUpComponent {
 
     onSubmit() {
         if (this.password === this.confirm_password) {
-             // tslint:disable-next-line:max-line-length
-             this.user = new User(null, this.username, this.password, this.confirm_password, this.firstname, this.lastname, this.email, this.address);
-            // this.signUpService.addUser(this.user).subscribe(data => {
-            //     console.log(data);
-            // });
+            // tslint:disable-next-line:max-line-length
+            this.user = new User(null, this.username, this.password, this.confirm_password, this.first_name, this.last_name, this.email, this.address);
+            this.signUpService.addUser(this.user).subscribe(data => {
+                console.log(data);
+            });
             this.isValid = true;
             this.hiddenCfPassMatch = true;
-            this.username = '';
-            this.password = '';
-            this.confirm_password = '';
-            this.firstname = '';
-            this.lastname = '';
-            this.email = '';
-            this.address = '';
+            this.username = null;
+            this.password = null;
+            this.confirm_password = null;
+            this.first_name = null;
+            this.last_name = null;
+            this.email = null;
+            this.address = null;
         } else {
             this.hiddenCfPassMatch = false;
             this.isValid = false;
