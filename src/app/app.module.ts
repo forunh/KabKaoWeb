@@ -13,10 +13,16 @@ import {OrderComponent} from './order/order.component';
 import {MenubarComponent} from './menubar/menubar.component';
 import {ModalComponent} from './modal/modal.component';
 import {BodyComponent} from './body/body.component'
+<<<<<<< HEAD
 import { MapComponent } from './map/map.component';
 
 
 import {OrderService} from './service/order.service';
+=======
+import {SignUpComponent} from './signup/signup.component';
+
+import {SignUpService} from './service/signup.service';
+>>>>>>> 42f098294db3e46969aad58fa6f310ba1c5cac54
 
 @NgModule({
     declarations: [
@@ -26,7 +32,11 @@ import {OrderService} from './service/order.service';
         MenubarComponent,
         ModalComponent,
         BodyComponent,
+<<<<<<< HEAD
         MapComponent
+=======
+        SignUpComponent
+>>>>>>> 42f098294db3e46969aad58fa6f310ba1c5cac54
     ],
     imports: [
         BrowserModule,
@@ -37,7 +47,11 @@ import {OrderService} from './service/order.service';
         AgmCoreModule.forRoot({apiKey: 'AIzaSyAf-hWJtntAe1oGV9UwbVgG-3r25o65p14'}),
         // GoogleplaceDirective
     ],
+<<<<<<< HEAD
     providers: [OrderService],
+=======
+    providers: [SignUpService],
+>>>>>>> 42f098294db3e46969aad58fa6f310ba1c5cac54
     bootstrap: [AppComponent]
 })
 export class AppModule {

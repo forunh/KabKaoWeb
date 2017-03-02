@@ -6,22 +6,18 @@
             <p>Order Food Online & delivery</p>
             <br>
             <br>
-            <button type="button" class="btn btn-primary" (click)="sigup.openModal()">Sign Up</button>
+            <button type="button" class="btn btn-primary" (click)="signUpModal.showChildModal()">Sign Up</button>
             <button type="button" class="btn btn-warning marleft" (click)="isLogin = true">Sign In</button>
         </div>
     </span>
 </div>
 <!--homepage-->
 <div *ngIf="isLogin">
-    <app-menubar #menubar></app-menubar>
-<<<<<<< HEAD
-    <app-body [isOrder]="menubar.isOrder" [menuLists]="menubar.menuLists"></app-body>
-</div>
-=======
-    <app-body [isOrder]="menubar.isOrder"></app-body>
+    <menu-bar #menubar></menu-bar>
+    <body-app [isOrder]="menubar.isOrder"></body-app>
 </div>
 
 <!--signup modal-->
-<app-signup #sigup></app-signup>
-
->>>>>>> 42f098294db3e46969aad58fa6f310ba1c5cac54
+<modal #signUpModal [title]="signup.signUpTitle">
+    <sign-up #signup (closeModal)="closeModal($event)"  hideModal="signUpModal.hideChildModal()"></sign-up>
+</modal>
