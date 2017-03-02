@@ -22,9 +22,9 @@ export class OrderComponent implements OnInit {
   private createOrder(){
       let orderList = {
         id:null,
-        userId:234,
-        price:4000,
-        address:"1 Abc Rd., Abc, BKK 12345",
+        userId:235554,
+        price:40500,
+        address:"1 Abc Rd., Abcr, BKK 12345",
         createAt:null
       };
       this.orderService.addOrder(orderList)
@@ -38,6 +38,10 @@ export class OrderComponent implements OnInit {
             console.error("Error adding order!")
           }
       );
+  }
+
+  private toDateString(utcDate){
+    return new Date(utcDate).toDateString()+new Date(utcDate).toTimeString()
   }
 
 }

@@ -22,7 +22,7 @@
   <h3>Order Completed</h3>
   <strong>Order No.: </strong>{{orderListData.id}}
   <br>
-  <strong>Order Time: </strong>{{orderListData.create_at}}  
+  <strong>Order Time: </strong>{{toDateString(orderListData.createAt)}}  
   <br>
   <strong>Name: </strong>{{orderListData.userId}}
   <br>  
@@ -33,5 +33,7 @@
 
 <!--Map-->
 <app-modal #mapModal [title]="mapTitle">
-  <app-map></app-map>
+  <div>
+    <app-map></app-map>
+  </div>
 </app-modal>
