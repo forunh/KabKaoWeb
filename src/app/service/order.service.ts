@@ -15,8 +15,8 @@ export class OrderService {
         let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers: headers});
         let body = JSON.stringify(orderList);
-        // Note: This is only an example. The following API call will fail because there is no actual API to talk to.
-        return this.http.post(this.url+'/orderList', body, headers).map((res:Response) => res.json());
+        console.log(body)
+        return this.http.post(this.url+'/orderList', body, options).map((res:Response) => res.json());
     
     }
 
