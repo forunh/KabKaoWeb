@@ -13,6 +13,6 @@ export class BodyComponent implements OnInit {
   }
 
   @Input() isOrder = false;
-  @Input() menuLists:Array<Object>;
+
 }
 
