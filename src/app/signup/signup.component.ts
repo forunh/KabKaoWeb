@@ -1,11 +1,11 @@
 import { Component, Input, EventEmitter, Output} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { User } from './model/user';
-import { SignUpService } from './service/signup.service';
+import { User } from '../model/user';
+import { SignUpService } from '../service/signup.service';
 
 @Component({
-    selector: 'sign-up',
-    templateUrl: '../html/sign_up.component.html',
+    selector: 'app-signup',
+    templateUrl: './signup.component.html',
 })
 export class SignUpComponent {
     user: User;

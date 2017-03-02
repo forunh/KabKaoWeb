@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-<<<<<<< HEAD
 export class AppComponent  { 
   name = 'KabKao';
   isLogin = false;
@@ -14,10 +13,4 @@ export class AppComponent  {
   closeModal() {
     this.hideModal();
   }
-=======
-
-export class AppComponent {
-    name = 'KabKao';
-    IsLogin = false;
->>>>>>> master
 }
