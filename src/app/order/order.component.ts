@@ -10,13 +10,14 @@ import { OrderService } from '../service/order.service';
 export class OrderComponent implements OnInit {
 
   @Input() menuList:Array<Object>;
-  orderList:OrderList;
+  orderListData:OrderList;
   mapTitle = "Address";
+  isMap = false;
+  isOrderComplete = false;  
   constructor(private orderService: OrderService) { }
 
   ngOnInit() {
   }
-  isMap = false;
 
   private createOrder(){
       let orderList = {
@@ -29,8 +30,9 @@ export class OrderComponent implements OnInit {
       this.orderService.addOrder(orderList)
       .subscribe(
           data => {
-            // this.orderList = data[0];
-            console.log(data)
+            this.orderListData = data;
+            this.isOrderComplete=true;
+            // console.log(data)
           },
           error => {
             console.error("Error adding order!")

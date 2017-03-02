@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="!isOrderComplete">
   <h3>User</h3>
   <br>
   <h3>Address</h3>
@@ -17,6 +17,20 @@
   <button type="button" class="btn btn-primary" (click)="createOrder()" >Confirm</button>
 
 </div>
+
+<div *ngIf="isOrderComplete">
+  <h3>Order Completed</h3>
+  <strong>Order No.: </strong>{{orderListData.id}}
+  <br>
+  <strong>Order Time: </strong>{{orderListData.create_at}}  
+  <br>
+  <strong>Name: </strong>{{orderListData.userId}}
+  <br>  
+  <strong>Address: </strong>{{orderListData.address}}
+  <br>  
+  <strong>Total Price: </strong>{{orderListData.price}}
+</div>
+
 <!--Map-->
 <app-modal #mapModal [title]="mapTitle">
   <app-map></app-map>
