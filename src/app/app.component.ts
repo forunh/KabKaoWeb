@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-// import { MenuBarComponent } from './menubar.component';
 
 @Component({
-  selector: 'my-app',
-  templateUrl: '../html/app.component.html',
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
+<<<<<<< HEAD
 export class AppComponent  { 
   name = 'KabKao';
   isLogin = false;
@@ -13,4 +14,10 @@ export class AppComponent  {
   closeModal() {
     this.hideModal();
   }
+=======
+
+export class AppComponent {
+    name = 'KabKao';
+    IsLogin = false;
+>>>>>>> master
 }

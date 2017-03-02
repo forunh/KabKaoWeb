@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
@@ -21,5 +22,40 @@ import { SignUpService } from './service/signup.service';
   bootstrap:    [ AppComponent ],
   providers:    [ ExampleService, SignUpService],
 
+=======
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
+
+import {AppComponent} from './app.component';
+import {CollapseComponent} from './collapse/collapse.component';
+
+import {CollapseModule, ModalModule} from 'ng2-bootstrap';
+import {OrderComponent} from './order/order.component';
+import {MenubarComponent} from './menubar/menubar.component';
+import {ModalComponent} from './modal/modal.component';
+import {BodyComponent} from './body/body.component'
+
+@NgModule({
+    declarations: [
+        AppComponent,
+        CollapseComponent,
+        OrderComponent,
+        MenubarComponent,
+        ModalComponent,
+        BodyComponent
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        CollapseModule.forRoot(),
+        ModalModule.forRoot(),
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
+>>>>>>> master
 })
-export class AppModule { }
+export class AppModule {
+}
