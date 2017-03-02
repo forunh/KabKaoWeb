@@ -10,7 +10,7 @@ import { OrderService } from '../service/order.service';
 })
 export class OrderComponent implements OnInit {
 
-  @Input() menuList:Array<Object>;
+  @Input() menuLists:Array<Object>;
   
   orderListData:OrderList;
   orderMenuData:Array<OrderMenu>;
