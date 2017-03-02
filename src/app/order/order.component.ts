@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { OrderList } from '../model/orderList';
 import { OrderMenu } from '../model/orderMenu';
 import { OrderService } from '../service/order.service';
+import {MenuOrder} from '../model/menuOrder'
 
 @Component({
   selector: 'app-order',
@@ -10,7 +11,7 @@ import { OrderService } from '../service/order.service';
 })
 export class OrderComponent implements OnInit {
 
-  @Input() menuLists:Array<Object>;
+  @Input() menuLists:Array<MenuOrder>;
   
   orderListData:OrderList;
   orderMenuData:Array<OrderMenu>;
@@ -32,16 +33,17 @@ export class OrderComponent implements OnInit {
         address:this.lat.toString()+","+this.lng.toString(),
         createAt:null
       };
-      let menuList:Array<Object>=[
-        {
-          menuId:1,
-          quantity:1
-        },
-        {
-          menuId:2,
-          quantity:1
-        }
-      ];
+
+      let menu:Array<Object>=new Array<Object>();
+      for(let menuList of this.menuLists){
+        menu.push(
+          {
+            menuId:menuList.id,
+            quantity:menuList.quantity
+          }
+        );
+      }
+      
       this.orderService.addOrderList(orderList)
       .subscribe(
           data => {
@@ -50,7 +52,7 @@ export class OrderComponent implements OnInit {
             // console.log(data)
             let orderMenuList = {
               orderId: data.id,
-              menuList: menuList
+              menuList: menu
             }
              this.orderService.addOrderMenuList(orderMenuList)
             .subscribe(
@@ -77,5 +79,21 @@ export class OrderComponent implements OnInit {
     this.lat=lat;
     this.lng=lng;
     this.isSelectAddress=true
+  }
+
+    calTotalMenuPrice(){
+      var totalPrice:number=0;
+      for(var menuList of this.menuLists){
+        totalPrice += +menuList.price*+menuList.quantity;
+      }
+      return totalPrice
+    }
+
+   calTotalQuantity(){
+    let totalQuantity:number=0;
+    for(let menuList of this.menuLists){
+      totalQuantity += +menuList.quantity;
+    }
+    return totalQuantity
   }
 }
