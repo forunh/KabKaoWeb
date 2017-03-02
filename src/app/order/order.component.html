@@ -2,6 +2,7 @@
   <h3>User</h3>
   <br>
   <h3>Address</h3>
+   <button type="button" class="btn btn-primary" (click)="isMap = true" >Map</button>
   <br>
   <h3>Menu</h3>
   <br>
@@ -15,4 +16,8 @@
   <br>
   <button type="button" class="btn btn-primary" (click)="createOrder()" >Confirm</button>
 
+</div>
+<!--Map-->
+<div *ngIf="isMap">
+    <app-map></app-map>
 </div>

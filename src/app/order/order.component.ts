@@ -15,6 +15,7 @@ export class OrderComponent implements OnInit {
 
   ngOnInit() {
   }
+  isMap = false;
 
   private createOrder(){
       let orderList = {
