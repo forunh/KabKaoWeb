@@ -13,7 +13,9 @@ export class OrderComponent implements OnInit {
   orderListData:OrderList;
   mapTitle = "Address";
   isMap = false;
-  isOrderComplete = false;  
+  isOrderComplete = false; 
+  lat:Number;
+  lng:Number; 
   constructor(private orderService: OrderService) { }
 
   ngOnInit() {
@@ -44,4 +46,8 @@ export class OrderComponent implements OnInit {
     return new Date(utcDate).toDateString()+new Date(utcDate).toTimeString()
   }
 
+  private selectAddress(lat:Number,lng:Number){
+    this.lat=lat;
+    this.lng=lng;
+  }
 }
