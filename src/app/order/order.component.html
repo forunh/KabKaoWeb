@@ -2,8 +2,15 @@
 <div class="pad-left">
   <h2>Ordering</h2>
   <h3>User</h3>
-  <br>
+  <div class="pad-left">
+    <br>
+  </div>
   <h3>Address</h3>
+      <div class="pad-left">
+        {{lat}},{{lng}}
+        <br>
+        <button type="button" class="btn btn-primary" (click)="mapModal.showChildModal()" >Select Address</button>
+      </div>
   <br>
   <h3>Menu</h3>
   <div class="pad-left">
