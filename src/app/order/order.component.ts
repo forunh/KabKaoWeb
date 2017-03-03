@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,Output,EventEmitter } from '@angular/core';
 import { OrderList } from '../model/orderList';
 import { OrderMenu } from '../model/orderMenu';
 import { OrderService } from '../service/order.service';
@@ -12,12 +12,14 @@ import {MenuOrder} from '../model/menuOrder'
 export class OrderComponent implements OnInit {
 
   @Input() menuLists:Array<MenuOrder>;
-  
+  @Output() onOrderSent = new EventEmitter<boolean>();
+
   orderListData:OrderList;
   orderMenuData:Array<OrderMenu>;
-  mapTitle = "Address";
+  mapTitle = "ADDRESS";
   isSelectAddress = false;
   isOrderComplete = false; 
+  isLoading = false;
   lat:Number;
   lng:Number; 
   constructor(private orderService: OrderService) { }
@@ -26,6 +28,7 @@ export class OrderComponent implements OnInit {
   }
 
   private createOrder(){
+      this.isLoading = true;
       let orderList = {
         id:null,
         userId:235554,
@@ -59,6 +62,9 @@ export class OrderComponent implements OnInit {
                 data => {
                   this.orderMenuData = data
                   console.log(data)
+                  this.isLoading = false;
+                  this.onOrderSent.emit(true);
+                  this.clearOrder();
                 },
                 error => {
                   console.error("Error adding orderMenu!")
@@ -79,6 +85,10 @@ export class OrderComponent implements OnInit {
     this.lat=lat;
     this.lng=lng;
     this.isSelectAddress=true
+  }
+
+  private clearOrder(){
+    this.menuLists = null;
   }
 
     calTotalMenuPrice(){

@@ -14,7 +14,7 @@ import {MenubarComponent} from './menubar/menubar.component';
 import {ModalComponent} from './modal/modal.component';
 import {BodyComponent} from './body/body.component'
 import { MapComponent } from './map/map.component';
-
+import {OrderDetailComponent} from './order-detail/order-detail.component'
 
 import {OrderService} from './service/order.service';
 
@@ -26,7 +26,8 @@ import {OrderService} from './service/order.service';
         MenubarComponent,
         ModalComponent,
         BodyComponent,
-        MapComponent
+        MapComponent,
+        OrderDetailComponent
     ],
     imports: [
         BrowserModule,
