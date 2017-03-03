@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
+import {MenubarComponent} from './menubar/menubar.component'
 
 @Component({
   selector: 'app-root',
@@ -6,8 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  name = 'KabKao';
   username: string;
   password: string;
-  isLogin = false;
+    name = 'KabKao';
+    IsLogin = false;
+    @ViewChild(MenubarComponent)
+    private menubarComponent: MenubarComponent;
+
+    onOrderBodySent(isSent:boolean){
+      if(isSent){
+        this.menubarComponent.menuLists = [];
+      }
+    }
 }

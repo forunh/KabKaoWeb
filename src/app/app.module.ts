@@ -11,7 +11,11 @@ import {OrderComponent} from './order/order.component';
 import {MenubarComponent} from './menubar/menubar.component';
 import {ModalComponent} from './modal/modal.component';
 import {BodyComponent} from './body/body.component'
+import { MapComponent } from './map/map.component';
+import {OrderDetailComponent} from './order-detail/order-detail.component'
 import {SignUpComponent} from './signup/signup.component';
+
+import {OrderService} from './service/order.service';
 
 import {SignUpService} from './service/signup.service';
 
@@ -23,6 +27,8 @@ import {SignUpService} from './service/signup.service';
         MenubarComponent,
         ModalComponent,
         BodyComponent,
+        MapComponent,
+        OrderDetailComponent
         SignUpComponent
     ],
     imports: [

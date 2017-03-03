@@ -1,3 +1,8 @@
 <div *ngIf="isOrder">
-  <app-order></app-order>
+  <div >
+    <app-order #order [menuLists]="menuLists" (onOrderSent)="onOrderSent($event)"></app-order>
+  </div>
+  <div *ngIf="isDetail">
+    <app-order-detail #detail [orderListData]="order.orderListData" [orderMenuData]="order.orderMenuData" (onOrderDetailDone)="onOrderDetailDone($event)"></app-order-detail>
+  </div>
 </div>

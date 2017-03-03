@@ -1,18 +1,46 @@
-<div>
+<div *ngIf="!isOrderComplete" class="pad-left">
+  <h2>Ordering</h2>
   <h3>User</h3>
   <br>
   <h3>Address</h3>
   <br>
   <h3>Menu</h3>
-  <br>
-  <br>
-  <br>
-  Menus Price:
-  <br>
-  Delivery Price:
-  <br>
-  Total Price:
-  <br>
-  <button type="button" class="btn btn-primary" >Confirm</button>
+  <div class="pad-left">
+      <table>
+        <tr>
+          <th>Menu</th>
+          <th>Price</th>
+          <th>Quantity</th>
+        </tr>
+        <tr *ngFor="let menuList of menuLists ">
+          <td>{{menuList.name}}</td>
+          <td>{{menuList.price}}</td>
+          <td>{{menuList.quantity}}</td>
+        </tr>
+      </table>
+      <br>
+      <strong>Quantity: </strong>{{calTotalQuantity()}}
+      <br>
+      <strong>Menu Price: </strong>{{calTotalMenuPrice()}}
+      <br>
+      <strong>Delivery Price: </strong>
+      <br>
+      <strong>Total Price: </strong>
+      <br>
+  </div>
+  <div class="pad">
+      <button type="button" class="btn btn-primary" (click)="createOrder()" [disabled]="!isSelectAddress||isLoading">Confirm</button>
+      <span *ngIf="isLoading">Loading . . .</span>
+  </div>
 
 </div>
+
+
+
+<!--Map-->
+<app-modal #mapModal [title]="mapTitle">
+  <div>
+    <app-map #map></app-map>
+    <button class="btn btn-primary" (click)="selectAddress(map.lat,map.lng); mapModal.hideChildModal();" >OK</button>
+  </div>
+</app-modal>
