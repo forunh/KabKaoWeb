@@ -17,7 +17,7 @@ export class OrderService {
         let body = JSON.stringify(orderList);
         console.log(body)
         return this.http.post(this.url+'/orderList', body, options).map((res:Response) => res.json());
-    
+
     }
 
     public getOrderListByUserId(userId){
@@ -36,7 +36,7 @@ export class OrderService {
         let body = JSON.stringify(orderMenu);
         console.log(body)
         return this.http.post(this.url+'/orderMenu', body, options).map((res:Response) => res.json());
-    
+
     }
 
     public addOrderMenuList(orderMenuList){
@@ -45,7 +45,7 @@ export class OrderService {
         let body = JSON.stringify(orderMenuList);
         console.log(body)
         return this.http.post(this.url+'/AddOrderMenu', body, options).map((res:Response) => res.json());
-    
+
     }
 
     public getOrderMenuByOrderId(orderId){
@@ -56,5 +56,5 @@ export class OrderService {
         return this.http.get(this.url+'/orderMenu').map((res:Response) => res.json());
 
     }
-    
+
 }
