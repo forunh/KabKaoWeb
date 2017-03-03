@@ -2,6 +2,7 @@ import { Component, OnInit, Input,Output,EventEmitter } from '@angular/core';
 import { OrderList } from '../model/orderList';
 import { OrderMenu } from '../model/orderMenu';
 import { OrderService } from '../service/order.service';
+import { GgMapService} from '../service/gg-map.service';
 import {MenuOrder} from '../model/menuOrder'
 
 @Component({
@@ -21,7 +22,8 @@ export class OrderComponent implements OnInit {
   isLoading = false;
   lat:Number;
   lng:Number; 
-  constructor(private orderService: OrderService) { }
+  address:String="Please select address.";
+  constructor(private orderService: OrderService,private ggMapService:GgMapService ) { }
 
   ngOnInit() {
   }
@@ -32,7 +34,7 @@ export class OrderComponent implements OnInit {
         id:null,
         userId:235554,
         price:40500,
-        address:this.lat.toString()+","+this.lng.toString(),
+        address:this.address,
         createAt:null
       };
 
@@ -75,6 +77,20 @@ export class OrderComponent implements OnInit {
           },
           error => {
             console.error("Error adding orderList!")
+          }
+      );
+  }
+
+  private getAddress(){
+      this.ggMapService.getAddressByCoordinate(this.lat.toString()+","+this.lng.toString())
+      .subscribe(
+          data => {
+            this.address = data.results[0].formatted_address
+            console.log(data)
+            
+          },
+          error => {
+            console.error("Error search address!")
           }
       );
   }

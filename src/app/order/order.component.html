@@ -7,9 +7,10 @@
   </div>
   <h3>Address</h3>
       <div class="pad-left">
+        <span >{{address}}</span>
         {{lat}},{{lng}}
         <br>
-        <button type="button" class="btn btn-primary" (click)="mapModal.showChildModal()" >Select Address</button>
+        <button type="button" class="btn btn-primary" (click)="mapModal.showChildModal(); " >Select Address</button>
       </div>
   <br>
   <h3>Menu</h3>
@@ -49,6 +50,6 @@
 <app-modal #mapModal [title]="mapTitle">
   <div>
     <app-map #map></app-map>
-    <button class="btn btn-primary" (click)="selectAddress(map.lat,map.lng); mapModal.hideChildModal();" >OK</button>
+    <button class="btn btn-primary" (click)="selectAddress(map.lat,map.lng); mapModal.hideChildModal(); getAddress();" >OK</button>
   </div>
 </app-modal>
