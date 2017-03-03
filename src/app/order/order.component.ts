@@ -71,11 +71,13 @@ export class OrderComponent implements OnInit {
                   this.clearOrder();
                 },
                 error => {
+                  this.isLoading = false;
                   console.error("Error adding orderMenu!")
                 }
             );
           },
           error => {
+            this.isLoading = false;
             console.error("Error adding orderList!")
           }
       );
