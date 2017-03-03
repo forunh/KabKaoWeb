@@ -7,7 +7,7 @@ import {OrderList} from '../model/orderList';
 @Injectable()
 export class OrderService {
 
-    private url = 'http://localhost:1234';
+    private url = 'http://52.187.62.107:10510';
     constructor(private http:Http) {
     }
 
