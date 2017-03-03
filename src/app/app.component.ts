@@ -1,5 +1,6 @@
 import { Component,ViewChild } from '@angular/core';
 import {MenubarComponent} from './menubar/menubar.component'
+import {BodyComponent} from './body/body.component';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +11,23 @@ export class AppComponent {
   username: string;
   password: string;
     name = 'KabKao';
-    IsLogin = false;
+    isLogin = false;
     @ViewChild(MenubarComponent)
     private menubarComponent: MenubarComponent;
+    @ViewChild(BodyComponent)
+    private bodyComponent: BodyComponent;
 
     onOrderBodySent(isSent:boolean){
       if(isSent){
         this.menubarComponent.menuLists = [];
       }
+    }
+
+    onClickCheckout(menuListsEvent:Array<Object>){
+        console.log(menuListsEvent)
+        if(menuListsEvent){
+          this.bodyComponent.menuLists = menuListsEvent;
+          this.bodyComponent.isOrder = true;
+        }
     }
 }

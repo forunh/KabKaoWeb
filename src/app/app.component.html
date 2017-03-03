@@ -31,8 +31,8 @@
 </div>
 <!--homepage-->
 <div *ngIf="isLogin">
-    <app-menubar #menubar></app-menubar>
-    <app-body (onOrderBodySent)="onOrderBodySent($event)"[isOrder]="menubar.isOrder" [menuLists]="menubar.menuLists"></app-body>
+    <app-menubar #menubar (onClickCheckout)="onClickCheckout($event)"></app-menubar>
+    <app-body (onOrderBodySent)="onOrderBodySent($event)" [menuLists]="menubar.menuLists"></app-body>
 </div>
 
 <!--signup modal-->

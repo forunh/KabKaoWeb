@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import {MenuOrder} from '../model/menuOrder'
 
 @Component({
   selector: 'app-menubar',
@@ -11,7 +12,7 @@ export class MenubarComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  @Output() onClickCheckout = new EventEmitter<Array<MenuOrder>>();
   menuLists:Array<MenuOrder>=[
     {
       id:1,
@@ -34,4 +35,26 @@ export class MenubarComponent implements OnInit {
   ];
   OrderTitle = "ORDER";
   isOrder = false;
+
+  calTotalPrice(){
+    var totalPrice:number=0;
+    for(var menuList of this.menuLists){
+       totalPrice += menuList.price*menuList.quantity;
+    }
+    return totalPrice
+  }
+
+   calTotalQuantity(){
+    var totalQuantity:number=0;
+    for(var menuList of this.menuLists){
+       totalQuantity += menuList.quantity;
+    }
+    return totalQuantity
+  }
+
+  checkOut(){
+    this.onClickCheckout.emit(this.menuLists);
+    this.isOrder = true;
+  }
+
 }
