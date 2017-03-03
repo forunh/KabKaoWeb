@@ -33,7 +33,7 @@ export class MenubarComponent implements OnInit {
       quantity:1
     }
   ];
-  OrderTitle = "Order";
+  OrderTitle = "ORDER";
   isOrder = false;
 
   calTotalPrice(){

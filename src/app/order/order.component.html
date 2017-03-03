@@ -1,4 +1,5 @@
 <div *ngIf="!isOrderComplete" class="pad-left">
+  <h2>Ordering</h2>
   <h3>User</h3>
   <div class="pad-left">
     <br>
@@ -35,41 +36,13 @@
       <br>
   </div>
   <div class="pad">
-      <button type="button" class="btn btn-primary" (click)="createOrder()" [disabled]="!isSelectAddress">Confirm</button>
+      <button type="button" class="btn btn-primary" (click)="createOrder()" [disabled]="!isSelectAddress||isLoading">Confirm</button>
+      <span *ngIf="isLoading">Loading . . .</span>
   </div>
 
 </div>
 
-<div *ngIf="isOrderComplete" class="pad-left">
-  <h3>Order Detail</h3>
-  <strong>Order No.: </strong>{{orderListData.id}}
-  <br>
-  <strong>Order Time: </strong>{{toDateString(orderListData.createAt)}}  
-  <br>
-  <strong>Name: </strong>{{orderListData.userId}}
-  <br>  
-  <strong>Address: </strong>{{orderListData.address}}
-  <br>  
-  <strong>Menu:</strong>
-  <div>
-    <table>
-      <tr>
-        <th>Menu</th>
-        <th>Price</th>
-        <th>Quantity</th>
-      </tr>
-      <tr *ngFor="let orderMenu of orderMenuData ">
-        <td>{{orderMenu.menuId}}</td>
-        <td>300</td>
-        <td>{{orderMenu.quantity}}</td>
-      </tr>
-    </table>
-  </div>
-  <br>
-  <strong>Total Quantity: </strong>
-  <br>
-  <strong>Total Price: </strong>{{orderListData.price}}
-</div>
+
 
 <!--Map-->
 <app-modal #mapModal [title]="mapTitle">
