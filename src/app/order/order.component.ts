@@ -23,9 +23,14 @@ export class OrderComponent implements OnInit {
   lat:Number;
   lng:Number; 
   address:String="Please select address.";
+  totalPrice=0;
+  menuPrice=0;
+  deliveryPrice=0;
   constructor(private orderService: OrderService,private ggMapService:GgMapService ) { }
 
   ngOnInit() {
+    this.menuPrice = this.calTotalMenuPrice()
+    this.totalPrice = this.menuPrice+this.deliveryPrice;
   }
 
   private createOrder(){
@@ -33,7 +38,7 @@ export class OrderComponent implements OnInit {
       let orderList = {
         id:null,
         userId:235554,
-        price:40500,
+        price:this.totalPrice,
         address:this.address,
         createAt:null
       };
