@@ -28,7 +28,7 @@ import {SignUpService} from './service/signup.service';
         ModalComponent,
         BodyComponent,
         MapComponent,
-        OrderDetailComponent
+        OrderDetailComponent,
         SignUpComponent
     ],
     imports: [
