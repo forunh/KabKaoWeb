@@ -12,13 +12,12 @@ import {MenuOrder} from '../model/menuOrder'
 export class OrderComponent implements OnInit {
 
   @Input() menuLists:Array<MenuOrder>;
-  @Output() onOrderSent = new EventEmitter<boolean>();
+  @Output() onOrderSent = new EventEmitter<Object>();
 
   orderListData:OrderList;
   orderMenuData:Array<OrderMenu>;
   mapTitle = "ADDRESS";
   isSelectAddress = false;
-  isOrderComplete = false; 
   isLoading = false;
   lat:Number;
   lng:Number; 
@@ -51,7 +50,6 @@ export class OrderComponent implements OnInit {
       .subscribe(
           data => {
             this.orderListData = data;
-            this.isOrderComplete=true;
             // console.log(data)
             let orderMenuList = {
               orderId: data.id,
@@ -63,7 +61,11 @@ export class OrderComponent implements OnInit {
                   this.orderMenuData = data
                   console.log(data)
                   this.isLoading = false;
-                  this.onOrderSent.emit(true);
+                  let newEvent = {
+                    orderListData:this.orderListData,
+                    orderMenuData:this.orderMenuData
+                  }
+                  this.onOrderSent.emit(newEvent);
                   this.clearOrder();
                 },
                 error => {
