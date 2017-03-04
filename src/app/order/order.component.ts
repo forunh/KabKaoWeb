@@ -69,6 +69,7 @@ export class OrderComponent implements OnInit {
                     orderMenuData:this.orderMenuData
                   }
                   this.onOrderSent.emit(newEvent);
+                  this.orderService.setOrderStatus(false);
                   this.clearOrder();
                 },
                 error => {

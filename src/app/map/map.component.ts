@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from "../service/user.service";
 
 @Component({
   selector: 'app-map',
@@ -11,7 +12,7 @@ export class MapComponent implements OnInit {
    lat: number = 13.729052;
    lng: number = 100.775567;
    zoom: number = 13;
-   marker = 
+   marker =
 	  {
 		  lat: 13.729052,
 		  lng: 100.775567,
@@ -19,12 +20,12 @@ export class MapComponent implements OnInit {
 		  draggable: false
 	  };
 
-  constructor() { }
+  constructor(private userService:UserService) { }
 
   ngOnInit() {
   }
-   
-  
+
+
   mapClicked($event: any) {
     console.log($event)
     this.marker={
