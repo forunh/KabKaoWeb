@@ -1,5 +1,5 @@
 <!--login page-->
-<div *ngIf="!isLogin" class="center">
+<div *ngIf="!getLoginStatus()" class="center">
     <span class="square">
         <h1>KABKAO</h1>
         <div>
@@ -7,12 +7,14 @@
             <br>
             <br>
             <button type="button" class="btn btn-primary" >Sign Up</button>
-            <button type="button" class="btn btn-warning marleft" (click)="isLogin = true">Sign In</button>
+            <button type="button" class="btn btn-info marleft" (click)="login()">Sign In</button>
         </div>
     </span>
 </div>
 <!--homepage-->
-<div *ngIf="isLogin">
-    <app-menubar #menubar (onClickCheckout)="onClickCheckout($event)"></app-menubar>
-    <app-body (onOrderBodySent)="onOrderBodySent($event)" [menuLists]="menubar.menuLists"></app-body>
-</div>
+<!--<div *ngIf="isLogin">-->
+    <!--<app-menubar #menubar (onClickCheckout)="onClickCheckout($event)"></app-menubar>-->
+    <!--<app-body (onOrderBodySent)="onOrderBodySent($event)" [menuLists]="menubar.menuLists"></app-body>-->
+<!--</div>-->
+<app-menubar #menubar (onClickCheckout)="onClickCheckout($event)" *ngIf="getLoginStatus()"></app-menubar>
+<router-outlet></router-outlet>

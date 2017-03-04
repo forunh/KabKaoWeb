@@ -17,6 +17,11 @@ import { MapComponent } from './map/map.component';
 import {OrderDetailComponent} from './order-detail/order-detail.component'
 
 import {OrderService} from './service/order.service';
+import {routing} from "./app.route";
+import {LocalStorageModule} from "angular-2-local-storage";
+import {UserService} from "./service/user.service";
+import {AuthGuard} from "./service/auth-guard.service";
+import { BlankComponent } from './blank.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +32,8 @@ import {OrderService} from './service/order.service';
         ModalComponent,
         BodyComponent,
         MapComponent,
-        OrderDetailComponent
+        OrderDetailComponent,
+        BlankComponent,
     ],
     imports: [
         BrowserModule,
@@ -36,9 +42,14 @@ import {OrderService} from './service/order.service';
         CollapseModule.forRoot(),
         ModalModule.forRoot(),
         AgmCoreModule.forRoot({apiKey: 'AIzaSyAf-hWJtntAe1oGV9UwbVgG-3r25o65p14'}),
+        routing,
+        LocalStorageModule.withConfig({
+          prefix: 'kabkao',
+          storageType: 'localStorage'
+        })
         // GoogleplaceDirective
     ],
-    providers: [OrderService],
+    providers: [OrderService, UserService, AuthGuard],
     bootstrap: [AppComponent]
 })
 export class AppModule {
