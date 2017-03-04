@@ -2,6 +2,8 @@ import { Component, OnInit, Input,Output,EventEmitter } from '@angular/core';
 import { OrderList } from '../model/orderList';
 import { OrderMenu } from '../model/orderMenu';
 import { OrderService } from '../service/order.service';
+import { GgMapService} from '../service/gg-map.service';
+import { DeliveryService} from '../service/delivery.service';
 import {MenuOrder} from '../model/menuOrder'
 
 @Component({
@@ -15,18 +17,26 @@ export class OrderComponent implements OnInit {
   @Output() onOrderSent = new EventEmitter<Object>();
 
   orderListData:OrderList;
+  postDelivery:string;
   orderMenuData:Array<OrderMenu>;
   mapTitle = "ADDRESS";
   isSelectAddress = false;
   isLoading = false;
   lat:Number;
-  lng:Number;
+  lng:Number; 
+  address:String="Please select address.";
+  totalPrice=0;
+  menuPrice=0;
+  deliveryPrice=0;
 
-  constructor(private orderService: OrderService) {
+  constructor(private orderService: OrderService,private ggMapService:GgMapService,private deliveryService: DeliveryService ) {
     this.menuLists = orderService.getCurrentOrders();
-  }
+
+   }
 
   ngOnInit() {
+    this.menuPrice = this.calTotalMenuPrice()
+    this.totalPrice = this.menuPrice+this.deliveryPrice;
   }
 
   private createOrder(){
@@ -34,8 +44,8 @@ export class OrderComponent implements OnInit {
       let orderList = {
         id:null,
         userId:235554,
-        price:40500,
-        address:this.lat.toString()+","+this.lng.toString(),
+        price:this.totalPrice,
+        address:this.address,
         createAt:null
       };
 
@@ -64,7 +74,7 @@ export class OrderComponent implements OnInit {
                   this.orderMenuData = data
                   console.log(data)
                   this.isLoading = false;
-                  let newEvent = {
+                  let newEvent = { 
                     orderListData:this.orderListData,
                     orderMenuData:this.orderMenuData
                   }
@@ -73,12 +83,30 @@ export class OrderComponent implements OnInit {
                   this.clearOrder();
                 },
                 error => {
+                  this.isLoading = false;
                   console.error("Error adding orderMenu!")
                 }
             );
           },
           error => {
+            this.isLoading = false;
             console.error("Error adding orderList!")
+          }
+      );
+  }
+
+
+
+  private getAddress(){
+      this.ggMapService.getAddressByCoordinate(this.lat.toString()+","+this.lng.toString())
+      .subscribe(
+          data => {
+            this.address = data.results[0].formatted_address
+            console.log(data)
+            
+          },
+          error => {
+            console.error("Error search address!")
           }
       );
   }
@@ -112,4 +140,25 @@ export class OrderComponent implements OnInit {
     }
     return totalQuantity
   }
+    private getDeliveryPrice(){
+    
+        this.deliveryService.postDestination(this.lat,this.lng)
+            .subscribe(
+            data=> {
+              this.postDelivery = JSON.stringify(data);
+              this.deliveryPrice = data.price;
+              this.totalPrice = this.menuPrice+this.deliveryPrice;
+              console.log(data.price)
+              console.log("aaaaaaaa"+this.postDelivery)
+              
+            },
+            error => {
+               console.error("Cannnot get deliveryPrice!")
+            }
+        
+          )
+  }
+
+  
+
 }

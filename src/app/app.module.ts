@@ -2,11 +2,12 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-
-// import {GoogleplaceDirective} from 'angular2-google-map-auto-complete/directives/googleplace.directive';
+import {routing} from "./app.route";
+//dependency
 import {CollapseModule, ModalModule} from 'ng2-bootstrap';
 import { AgmCoreModule } from 'angular2-google-maps/core';
-
+import {LocalStorageModule} from "angular-2-local-storage";
+//component
 import {AppComponent} from './app.component';
 import {CollapseComponent} from './collapse/collapse.component';
 import {OrderComponent} from './order/order.component';
@@ -15,13 +16,14 @@ import {ModalComponent} from './modal/modal.component';
 import {BodyComponent} from './body/body.component'
 import { MapComponent } from './map/map.component';
 import {OrderDetailComponent} from './order-detail/order-detail.component'
-
+import { BlankComponent } from './blank.component';
+//service
 import {OrderService} from './service/order.service';
-import {routing} from "./app.route";
-import {LocalStorageModule} from "angular-2-local-storage";
 import {UserService} from "./service/user.service";
 import {AuthGuard} from "./service/auth-guard.service";
-import { BlankComponent } from './blank.component';
+import {GgMapService} from './service/gg-map.service';
+import {DeliveryService} from './service/delivery.service';
+
 
 @NgModule({
     declarations: [
@@ -49,7 +51,8 @@ import { BlankComponent } from './blank.component';
         })
         // GoogleplaceDirective
     ],
-    providers: [OrderService, UserService, AuthGuard],
+    providers: [OrderService, UserService, AuthGuard,GgMapService,DeliveryService],
+
     bootstrap: [AppComponent]
 })
 export class AppModule {
