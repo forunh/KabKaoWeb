@@ -9,7 +9,12 @@
       <div class="pad-left">
         <span >{{address}}</span>
         <br>
-        <button type="button" class="btn btn-primary" (click)="mapModal.showChildModal(); " >Select Address</button>
+        <button type="button" class="btn btn-primary" (click)="selectAddress(map.marker.lat,map.marker.lng); getDeliveryPrice(); getAddress();" >Select</button>
+        <br>        
+         <div>
+          <app-map #map></app-map>
+        </div>
+        <br>
       </div>
   <br>
   <h3>Menu</h3>
@@ -43,12 +48,3 @@
 
 </div>
 
-
-
-<!--Map-->
-<app-modal #mapModal [title]="mapTitle">
-  <div>
-    <app-map #map></app-map>
-    <button class="btn btn-primary" (click)="selectAddress(map.lat,map.lng);getDeliveryPrice(); mapModal.hideChildModal(); getAddress();" >OK</button>
-  </div>
-</app-modal>
