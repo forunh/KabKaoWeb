@@ -25,7 +25,7 @@ export class DeliveryService {
         let options = new RequestOptions({headers: headers});
         let body = JSON.stringify({latitude:lat,longitude:lng});
         console.log(body)
-        return this.http.post(this.url+'/deliveryPrice',body,options).map((res:Response) => res.json());
+        return this.http.post(this.url+'/api'+'/deliveryPrice',body,options).map((res:Response) => res.json());
     
     
     }
