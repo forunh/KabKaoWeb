@@ -8,7 +8,6 @@ export class AuthGuard implements CanActivate{
   constructor(private userService: UserService) {}
 
   canActivate() {
-    console.log('AuthGuard#canActivate called');
     return this.userService.isLogin();
   }
 
