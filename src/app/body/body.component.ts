@@ -1,6 +1,7 @@
 import { Component, OnInit, Input,Output,EventEmitter } from '@angular/core';
 import { OrderList } from '../model/orderList';
 import { OrderMenu } from '../model/orderMenu';
+import {OrderService} from "../service/order.service";
 @Component({
   selector: 'app-body',
   templateUrl: './body.component.html',
@@ -8,7 +9,7 @@ import { OrderMenu } from '../model/orderMenu';
 })
 export class BodyComponent implements OnInit {
 
-  constructor() { }
+  constructor(private orderService: OrderService) { }
 
   ngOnInit() {
   }
@@ -19,6 +20,8 @@ export class BodyComponent implements OnInit {
   @Output() onOrderBodySent = new EventEmitter<boolean>();
   orderListData:OrderList;
   orderMenuData:Array<OrderMenu>;
+
+  currentOrders = null;
 
 
   onOrderSent(event:Object){

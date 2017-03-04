@@ -2,6 +2,7 @@ import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {MenuOrder} from '../model/menuOrder'
 import {UserService} from "../service/user.service";
 import {Router} from "@angular/router";
+import {OrderService} from "../service/order.service";
 
 @Component({
   selector: 'app-menubar',
@@ -10,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class MenubarComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService, private orderService:OrderService, private router: Router) {
   }
 
   ngOnInit() {
@@ -27,7 +28,7 @@ export class MenubarComponent implements OnInit {
     {
       id: 2,
       name: "ข้าวกระเพรา",
-      price: 40,
+      price: 80,
       quantity: 2
     },
     {
@@ -57,8 +58,11 @@ export class MenubarComponent implements OnInit {
   }
 
   checkOut() {
-    this.onClickCheckout.emit(this.menuLists);
-    this.isOrder = true;
+    // this.onClickCheckout.emit(this.menuLists);
+    // this.isOrder = true;
+    this.orderService.setOrderStatus(true);
+    this.addOrders();
+    this.router.navigate(['/body']);
   }
 
   isCurrentUri(uri: String) {
@@ -68,5 +72,9 @@ export class MenubarComponent implements OnInit {
   logout() {
     this.userService.logout();
     this.router.navigate(['/#']);
+  }
+
+  addOrders() {
+    this.orderService.addCurrentOrders(this.menuLists);
   }
 }

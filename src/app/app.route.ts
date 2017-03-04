@@ -13,7 +13,8 @@ const APP_ROUTES: Routes = [
     canActivate: [AuthGuard]},
   { path: '#', component: BlankComponent},
   { path: 'modal', component: BodyComponent},
-  { path: 'test', component: MenubarComponent}
+  { path: 'test', component: MenubarComponent},
+  { path: 'body', component: BodyComponent},
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);
