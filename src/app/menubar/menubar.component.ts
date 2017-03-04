@@ -12,57 +12,24 @@ import {OrderService} from "../service/order.service";
 export class MenubarComponent implements OnInit {
 
   constructor(private userService: UserService, private orderService:OrderService, private router: Router) {
+    
   }
 
   ngOnInit() {
+    
   }
 
   @Output() onClickCheckout = new EventEmitter<Array<MenuOrder>>();
-  menuLists: Array<MenuOrder> = [
-    {
-      id: 1,
-      name: "ข้าวผัด",
-      price: 40,
-      quantity: 1
-    },
-    {
-      id: 2,
-      name: "ข้าวกระเพรา",
-      price: 80,
-      quantity: 2
-    },
-    {
-      id: 4,
-      name: "ข้าวต้ม",
-      price: 30,
-      quantity: 1
-    }
-  ];
   OrderTitle = "ORDER";
   isOrder = false;
 
-  calTotalPrice() {
-    var totalPrice: number = 0;
-    for (var menuList of this.menuLists) {
-      totalPrice += menuList.price * menuList.quantity;
-    }
-    return totalPrice
-  }
-
-  calTotalQuantity() {
-    var totalQuantity: number = 0;
-    for (var menuList of this.menuLists) {
-      totalQuantity += menuList.quantity;
-    }
-    return totalQuantity
-  }
-
+ 
   checkOut() {
     // this.onClickCheckout.emit(this.menuLists);
     // this.isOrder = true;
     this.orderService.setOrderStatus(true);
-    this.addOrders();
-    this.router.navigate(['/body']);
+    // this.addOrders();
+    this.router.navigate(['/order']);
   }
 
   isCurrentUri(uri: String) {
@@ -74,7 +41,7 @@ export class MenubarComponent implements OnInit {
     this.router.navigate(['/#']);
   }
 
-  addOrders() {
-    this.orderService.addCurrentOrders(this.menuLists);
-  }
+  // addOrders() {
+  //   this.orderService.addCurrentOrders(this.menuLists);
+  // }
 }

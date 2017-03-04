@@ -4,6 +4,7 @@ import { OrderMenu } from '../model/orderMenu';
 import { OrderService } from '../service/order.service';
 import {MenuOrder} from '../model/menuOrder'
 import {UserService} from "../service/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-order-detail',
@@ -16,7 +17,7 @@ export class OrderDetailComponent implements OnInit {
   @Input() orderMenuData:Array<OrderMenu>;
   @Output() onOrderDetailDone = new EventEmitter<boolean>();
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,private orderService: OrderService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -31,6 +32,8 @@ export class OrderDetailComponent implements OnInit {
   }
   onClickOrderDetailDone(){
     this.onOrderDetailDone.emit(true);
+    this.orderService.clearCurrentOrders();
+    this.router.navigate(['/']);
     // this.clearOrderDetail()
 
   }

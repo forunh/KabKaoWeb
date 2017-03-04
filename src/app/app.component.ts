@@ -34,13 +34,13 @@ export class AppComponent {
     }
   }
 
-  onClickCheckout(menuListsEvent: Array<Object>) {
-    console.log(menuListsEvent)
-    if (menuListsEvent) {
-      this.bodyComponent.menuLists = menuListsEvent;
-      this.bodyComponent.isOrder = true;
-    }
-  }
+  // onClickCheckout(menuListsEvent: Array<Object>) {
+  //   console.log(menuListsEvent)
+  //   if (menuListsEvent) {
+  //     this.bodyComponent.menuLists = menuListsEvent;
+  //     this.bodyComponent.isOrder = true;
+  //   }
+  // }
 
   login() {
     this.userService.login(this.model.username, this.model.password, (response) => {
