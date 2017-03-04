@@ -17,8 +17,8 @@ export class UserService {
   static VIEW_ORDER: string = "view_order";
   static CHANGE_ORDER: string = "change_order";
   static DELETE_ORDER: string = "delete_order";
-  
-  baseURL: string = 'http://52.187.62.107:10400/authen/';
+
+  baseURL: string = 'http://52.187.62.107:10300/authen/';
   private header: Headers = new Headers();
   private currentUser;
 

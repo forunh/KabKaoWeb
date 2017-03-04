@@ -5,6 +5,7 @@ import { OrderService } from '../service/order.service';
 import { GgMapService} from '../service/gg-map.service';
 import { DeliveryService} from '../service/delivery.service';
 import {MenuOrder} from '../model/menuOrder'
+import {UserService} from "../service/user.service";
 
 @Component({
   selector: 'app-order',
@@ -23,13 +24,13 @@ export class OrderComponent implements OnInit {
   isSelectAddress = false;
   isLoading = false;
   lat:Number;
-  lng:Number; 
+  lng:Number;
   address:String="Please select address.";
   totalPrice=0;
   menuPrice=0;
   deliveryPrice=0;
 
-  constructor(private orderService: OrderService,private ggMapService:GgMapService,private deliveryService: DeliveryService ) {
+  constructor(private orderService: OrderService,private ggMapService:GgMapService,private deliveryService: DeliveryService, private userService: UserService) {
     this.menuLists = orderService.getCurrentOrders();
 
    }
@@ -74,7 +75,7 @@ export class OrderComponent implements OnInit {
                   this.orderMenuData = data
                   console.log(data)
                   this.isLoading = false;
-                  let newEvent = { 
+                  let newEvent = {
                     orderListData:this.orderListData,
                     orderMenuData:this.orderMenuData
                   }
@@ -103,7 +104,7 @@ export class OrderComponent implements OnInit {
           data => {
             this.address = data.results[0].formatted_address
             console.log(data)
-            
+
           },
           error => {
             console.error("Error search address!")
@@ -141,7 +142,7 @@ export class OrderComponent implements OnInit {
     return totalQuantity
   }
     private getDeliveryPrice(){
-    
+
         this.deliveryService.postDestination(this.lat,this.lng)
             .subscribe(
             data=> {
@@ -150,15 +151,19 @@ export class OrderComponent implements OnInit {
               this.totalPrice = this.menuPrice+this.deliveryPrice;
               console.log(data.price)
               console.log("aaaaaaaa"+this.postDelivery)
-              
+
             },
             error => {
                console.error("Cannnot get deliveryPrice!")
             }
-        
+
           )
   }
 
-  
+  private getUser() {
+      return this.userService.getMyUserData();
+  }
+
+
 
 }
