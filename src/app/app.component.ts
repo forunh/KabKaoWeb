@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {MenubarComponent} from './menubar/menubar.component'
 import {BodyComponent} from './body/body.component';
 import {LocalStorageService} from "angular-2-local-storage";
@@ -12,35 +12,45 @@ import {Router} from "@angular/router";
 })
 
 export class AppComponent {
-    name = 'KabKao';
-    isLogin = false;
-    @ViewChild(MenubarComponent)
-    private menubarComponent: MenubarComponent;
-    @ViewChild(BodyComponent)
-    private bodyComponent: BodyComponent;
 
-    constructor(private localStorage: LocalStorageService, private userService: UserService, private router:Router) {}
+  @ViewChild(MenubarComponent)
+  private menubarComponent: MenubarComponent;
+  @ViewChild(BodyComponent)
+  private bodyComponent: BodyComponent;
 
-    onOrderBodySent(isSent:boolean){
-      if(isSent){
-        this.menubarComponent.menuLists = [];
-      }
+  errorMessage: string;
+  model = {
+    username: null,
+    password: null
+  };
+
+
+  constructor(private localStorage: LocalStorageService, private userService: UserService, private router: Router) {
+  }
+
+  onOrderBodySent(isSent: boolean) {
+    if (isSent) {
+      this.menubarComponent.menuLists = [];
     }
+  }
 
-    onClickCheckout(menuListsEvent:Array<Object>){
-        console.log(menuListsEvent)
-        if(menuListsEvent){
-          this.bodyComponent.menuLists = menuListsEvent;
-          this.bodyComponent.isOrder = true;
-        }
+  onClickCheckout(menuListsEvent: Array<Object>) {
+    console.log(menuListsEvent)
+    if (menuListsEvent) {
+      this.bodyComponent.menuLists = menuListsEvent;
+      this.bodyComponent.isOrder = true;
     }
+  }
 
-    login() {
-      this.userService.login();
+  login() {
+    this.userService.login(this.model.username, this.model.password, (response) => {
       this.router.navigate(['/']);
-    }
+    }, (error) => {
+      this.errorMessage = error.error.message;
+    });
+  }
 
-    getLoginStatus() {
-      return this.userService.isLogin()
-    }
+  getLoginStatus() {
+    return this.userService.isLogin()
+  }
 }

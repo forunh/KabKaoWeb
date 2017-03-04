@@ -3,18 +3,34 @@
     <span class="square">
         <h1>KABKAO</h1>
         <div>
-            <p>Order Food Online & delivery</p>
+            <div><p>Order Food Online & delivery</p></div>
             <br>
-            <br>
-            <button type="button" class="btn btn-primary" >Sign Up</button>
-            <button type="button" class="btn btn-info marleft" (click)="login()">Sign In</button>
+            <div class="container col-md-4 col-md-offset-4">
+              <form class="form-horizontal" #loginForm="ngForm">
+                <div class="form-group">
+                  <label for="username" class="col-md-3 control-label" style="font-size: 50%">Username</label>
+                  <div class="col-md-9"><input type="email" name="email" [(ngModel)]="model.username" class="form-control" id="username" placeholder="Username" required></div>
+                </div>
+                <div class="form-group">
+                  <label for="password" class="col-md-3 control-label" style="font-size: 50%">Password</label>
+                  <div class="col-md-9"><input type="password" class="form-control" id="password" minlength="8" [(ngModel)]="model.password" name="password" placeholder="Password" required></div>
+                </div>
+                <div>{{ errorMessage }}</div>
+              </form>
+              <br>
+              <div>
+                <button type="button" class="btn btn-info marleft" (click)="login()">Login</button> <span style="font-size: 75%">or</span>
+                <button type="button" class="btn btn-primary">Sign Up</button>
+              </div>
+            </div>
         </div>
+
     </span>
 </div>
 <!--homepage-->
 <!--<div *ngIf="isLogin">-->
-    <!--<app-menubar #menubar (onClickCheckout)="onClickCheckout($event)"></app-menubar>-->
-    <!--<app-body (onOrderBodySent)="onOrderBodySent($event)" [menuLists]="menubar.menuLists"></app-body>-->
+<!--<app-menubar #menubar (onClickCheckout)="onClickCheckout($event)"></app-menubar>-->
+<!--<app-body (onOrderBodySent)="onOrderBodySent($event)" [menuLists]="menubar.menuLists"></app-body>-->
 <!--</div>-->
 <app-menubar #menubar (onClickCheckout)="onClickCheckout($event)" *ngIf="getLoginStatus()"></app-menubar>
 <router-outlet></router-outlet>

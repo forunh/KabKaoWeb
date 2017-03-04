@@ -19,7 +19,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li [class.active]="isCurrentUri('')"><a [routerLink]="['']"> Menu <span class="sr-only">(current)</span></a></li>
-        <li [class.active]="isCurrentUri('modal')"><a [routerLink]="['/modal']">Order</a></li>
+        <li [class.active]="isCurrentUri('body')"><a [routerLink]="['/body']">Order</a></li>
+        <li><a>Add Order</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li (click)="childModal.showChildModal()"><a href="#"><img class="padleft5" alt="Brand" src="https://image.flaticon.com/icons/svg/308/308833.svg" style="cursor: pointer;width:25px;height:25px; "></a></li>

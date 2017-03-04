@@ -20,8 +20,11 @@ export class OrderComponent implements OnInit {
   isSelectAddress = false;
   isLoading = false;
   lat:Number;
-  lng:Number; 
-  constructor(private orderService: OrderService) { }
+  lng:Number;
+
+  constructor(private orderService: OrderService) {
+    this.menuLists = orderService.getCurrentOrders();
+  }
 
   ngOnInit() {
   }
@@ -45,7 +48,7 @@ export class OrderComponent implements OnInit {
           }
         );
       }
-      
+
       this.orderService.addOrderList(orderList)
       .subscribe(
           data => {
