@@ -34,4 +34,12 @@ export class OrderDetailComponent implements OnInit {
 
   }
 
+  calTotalQuantity(){
+    let totalQuantity:number=0;
+    for(let menu of this.orderMenuData){
+      totalQuantity += +menu.quantity;
+    }
+    return totalQuantity
+  }
+
 }
