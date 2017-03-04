@@ -2,15 +2,15 @@
   <form [hidden]="!isSubmit" (ngSubmit)="onSubmit()" #menuAdmin="ngForm">
     <div class="form-group">
       <label for="name">Title</label>
-      <input type="text" class="form-control" id="name" [(ngModel)]="name" #name="ngModel" placeholder="Title" [ngModelOptions]="{standalone: true}">
+      <input type="text" class="form-control" id="name" [(ngModel)]="name" placeholder="Title" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
       <label for="description">Title</label>
-      <input type="text" class="form-control" id="description" [(ngModel)]="description" #description="ngModel" placeholder="Description" [ngModelOptions]="{standalone: true}">
+      <input type="text" class="form-control" id="description" [(ngModel)]="description" placeholder="Description" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
       <label for="price">Title</label>
-      <input type="text" class="form-control" id="price" [(ngModel)]="price" #price="ngModel" placeholder="Price" [ngModelOptions]="{standalone: true}">
+      <input type="text" class="form-control" id="price" [(ngModel)]="price"  placeholder="Price" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
       <label for="pic">Upload Picture</label>
@@ -23,7 +23,7 @@
 
 
   <!--modal complete-->
-  <div [hidden]="!isSubmit" style="text-align: center">
+  <div [hidden]="isSubmit" style="text-align: center">
     <div>
       {{message}}
     </div>

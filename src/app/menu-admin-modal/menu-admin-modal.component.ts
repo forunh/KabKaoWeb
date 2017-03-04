@@ -1,35 +1,37 @@
-import {Component, OnInit, Input, ViewChild, OnChanges, SimpleChanges} from '@angular/core';
-import {ModalComponent} from "../modal/modal.component";
+import {Component, OnInit, Input, ViewChild, OnChanges} from '@angular/core';
+import {ModalComponent} from '../modal/modal.component';
 
 @Component({
   selector: 'app-menu-admin-modal',
   templateUrl: './menu-admin-modal.component.html',
   styleUrls: ['./menu-admin-modal.component.css']
 })
-export class MenuAdminModalComponent implements OnInit, OnChanges {
-  title = "Menu";
+export class MenuAdminModalComponent implements OnInit {
+  title = 'Menu';
   @Input() name: string;
-  description: string;
-  price: string;
+  @Input() escription: string;
+  @Input() price: string;
   pic: string;
-  isSubmit: true;
+  isSubmit = true;
   message: string;
-  @Input() show = true;
   @ViewChild('menuAdmin') menuAdmin: ModalComponent;
 
   constructor() { }
 
   ngOnInit() {
+    this.message = 'Save complete.';
+  }
+
+  showModal() {
     this.menuAdmin.showChildModal();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if(changes['show'].currentValue) {
-      this.menuAdmin.showChildModal();
-    }
-    else {
-      this.menuAdmin.hideChildModal();
-    }
+  hideModal() {
+    this.menuAdmin.hideChildModal();
+  }
+
+  onSubmit() {
+    return 0;
   }
 
 }
