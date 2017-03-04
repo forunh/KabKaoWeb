@@ -3,6 +3,7 @@ import { OrderList } from '../model/orderList';
 import { OrderMenu } from '../model/orderMenu';
 import { OrderService } from '../service/order.service';
 import {MenuOrder} from '../model/menuOrder'
+import {UserService} from "../service/user.service";
 
 @Component({
   selector: 'app-order-detail',
@@ -15,7 +16,7 @@ export class OrderDetailComponent implements OnInit {
   @Input() orderMenuData:Array<OrderMenu>;
   @Output() onOrderDetailDone = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
   }
@@ -40,6 +41,9 @@ export class OrderDetailComponent implements OnInit {
       totalQuantity += +menu.quantity;
     }
     return totalQuantity
+  }
+   private getUser() {
+      return this.userService.getMyUserData();
   }
 
 }

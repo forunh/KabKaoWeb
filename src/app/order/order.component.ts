@@ -44,7 +44,7 @@ export class OrderComponent implements OnInit {
       this.isLoading = true;
       let orderList = {
         id:null,
-        userId:235554,
+        userId:this.getUser().id,
         price:this.totalPrice,
         address:this.address,
         createAt:null
