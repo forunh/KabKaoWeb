@@ -18,16 +18,27 @@ export class UserService {
   static CHANGE_ORDER: string = "change_order";
   static DELETE_ORDER: string = "delete_order";
 
-
-  baseURL: string = 'http://52.187.62.107:10400/authen/';
+  baseURL: string = 'http://52.187.62.107:10300/authen/';
   private header: Headers = new Headers();
+  private currentUser;
 
   constructor(private http: Http, private localStorage: LocalStorageService) {
     this.header.append("Content-Type", "application/json");
     if(this.localStorage.get("login") === true) {
-      console.log("token " + this.localStorage.get("token"));
       this.header.append("Authorization", "Token " + this.localStorage.get("token"));
+      this.getUserData(0,
+        (response) => {
+          if(response.success == true)
+            this.currentUser = response.payload.user_data;
+          else
+            console.log("get user data error.")
+          },
+        (error) => {console.log(error)})
     }
+  }
+
+  private handleError(error: any) {
+    return Observable.throw(error.json());
   }
 
   public login(username: string, password: string, success: Function, errors: Function = null) {
@@ -36,21 +47,23 @@ export class UserService {
     })
       .map((response: Response) => response.json()).catch(this.handleError).subscribe(
         response => {
-          this.localStorage.set("login", true);
-          this.localStorage.set("token", response.payload.token);
-          this.header.append("Authorization", "Token " + response.payload.token);
-          success(response);
+          if(response.success == true) {
+            this.currentUser = response.payload.user_data;
+            this.localStorage.set("login", true);
+            this.localStorage.set("token", response.payload.token);
+            this.header.append("Authorization", "Token " + response.payload.token);
+            success(response);
+          }
+          else
+            console.log("get user data error.")
         },
         error => { if(error !== null) errors(error)});
-  }
-
-  private handleError(error: any) {
-    return Observable.throw(error.json());
   }
 
   public logout() {
     this.localStorage.set("login", false);
     this.localStorage.set("token", null);
+    this.currentUser = null;
   }
 
   public isLogin() {
@@ -70,9 +83,13 @@ export class UserService {
   public getUserData(id: number, success: Function, errors: Function = null) {
     let params:URLSearchParams = new URLSearchParams();
     params.set("id", String(id));
-    this.http.get(this.baseURL + 'user_info', {search: params, headers: this.header})
+    this.http.get(this.baseURL + 'user', {search: params, headers: this.header})
       .map((response: Response) => response.json()).catch(this.handleError).subscribe(
       response => {success(response);},
       error => { if(error !== null) errors(error);});
+  }
+
+  public getMyUserData() {
+    return this.currentUser;
   }
 }
