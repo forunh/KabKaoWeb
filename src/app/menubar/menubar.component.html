@@ -13,7 +13,7 @@
 <nav class="navbar navbar-custom">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#" style="color: #f7d08a; font-size: 200%">KABKAO</a>
+      <a class="navbar-brand" [routerLink]="['']" style="color: #f7d08a; font-size: 200%">KABKAO</a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -23,7 +23,19 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li (click)="childModal.showChildModal()"><img class="padleft5" alt="Brand" src="https://image.flaticon.com/icons/svg/308/308833.svg" style="cursor: pointer;width: 45px;height: 45px;padding-top: 15px; "></li>
-        <li (click)="logout()"><a>Log out</a></li>
+        <li *ngIf="getUser()" style="cursor: pointer; padding-right: 60px;">
+          <popover-content #myPopover style="color: #5b5941"
+            [closeOnClickOutside]="true">
+            <strong>Name: </strong>{{getUser().first_name}} {{getUser().last_name}}
+            <br>
+            <strong>Email: </strong>{{getUser().email}}
+            <br>
+            <br>
+            <button style="background-color: #f7d08a;" (click)="logout()">Log out</button>
+          </popover-content>
+          <a [popover]="myPopover">hi {{getUser().first_name}}</a>
+        </li>
+        <!--<li (click)="logout()"><a>Log out</a></li>-->
       </ul>
     </div>
   </div>

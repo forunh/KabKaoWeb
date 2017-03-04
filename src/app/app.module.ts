@@ -7,6 +7,7 @@ import {routing} from "./app.route";
 import {CollapseModule, ModalModule} from 'ng2-bootstrap';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import {LocalStorageModule} from "angular-2-local-storage";
+import {PopoverModule} from "ngx-popover";
 
 //component
 import {AppComponent} from './app.component';
@@ -52,7 +53,8 @@ import {DeliveryService} from './service/delivery.service';
         LocalStorageModule.withConfig({
           prefix: 'kabkao',
           storageType: 'localStorage'
-        })
+        }),
+        PopoverModule
         // GoogleplaceDirective
     ],
     providers: [OrderService, UserService, AuthGuard,GgMapService,DeliveryService],

@@ -12,7 +12,6 @@ import {OrderService} from "../service/order.service";
 export class MenubarComponent implements OnInit {
 
   constructor(private userService: UserService, private orderService:OrderService, private router: Router) {
-    
   }
 
   ngOnInit() {
@@ -22,7 +21,6 @@ export class MenubarComponent implements OnInit {
   @Output() onClickCheckout = new EventEmitter<Array<MenuOrder>>();
   OrderTitle = "ORDER";
   isOrder = false;
-
  
   checkOut() {
     // this.onClickCheckout.emit(this.menuLists);
@@ -39,6 +37,10 @@ export class MenubarComponent implements OnInit {
   logout() {
     this.userService.logout();
     this.router.navigate(['/#']);
+  }
+
+  private getUser() {
+      return this.userService.getMyUserData();
   }
 
   // addOrders() {
