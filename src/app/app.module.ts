@@ -18,6 +18,7 @@ import {OrderDetailComponent} from './order-detail/order-detail.component'
 
 import {OrderService} from './service/order.service';
 import {GgMapService} from './service/gg-map.service';
+import {DeliveryService} from './service/delivery.service';
 
 @NgModule({
     declarations: [
@@ -39,7 +40,7 @@ import {GgMapService} from './service/gg-map.service';
         AgmCoreModule.forRoot({apiKey: 'AIzaSyAf-hWJtntAe1oGV9UwbVgG-3r25o65p14'}),
         // GoogleplaceDirective
     ],
-    providers: [OrderService,GgMapService],
+    providers: [OrderService,GgMapService,DeliveryService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

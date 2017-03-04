@@ -3,6 +3,7 @@ import { OrderList } from '../model/orderList';
 import { OrderMenu } from '../model/orderMenu';
 import { OrderService } from '../service/order.service';
 import { GgMapService} from '../service/gg-map.service';
+import { DeliveryService} from '../service/delivery.service';
 import {MenuOrder} from '../model/menuOrder'
 
 @Component({
@@ -16,6 +17,7 @@ export class OrderComponent implements OnInit {
   @Output() onOrderSent = new EventEmitter<Object>();
 
   orderListData:OrderList;
+  postDelivery:string;
   orderMenuData:Array<OrderMenu>;
   mapTitle = "ADDRESS";
   isSelectAddress = false;
@@ -26,8 +28,8 @@ export class OrderComponent implements OnInit {
   totalPrice=0;
   menuPrice=0;
   deliveryPrice=0;
-  constructor(private orderService: OrderService,private ggMapService:GgMapService ) { }
-
+  //constructor(private orderService: OrderService,private ggMapService:GgMapService ) { }
+  constructor(private orderService: OrderService,private ggMapService:GgMapService,private deliveryService: DeliveryService ) { }
   ngOnInit() {
     this.menuPrice = this.calTotalMenuPrice()
     this.totalPrice = this.menuPrice+this.deliveryPrice;
@@ -38,7 +40,7 @@ export class OrderComponent implements OnInit {
       let orderList = {
         id:null,
         userId:235554,
-        price:this.totalPrice,
+        price:this.menuPrice,
         address:this.address,
         createAt:null
       };
@@ -68,7 +70,7 @@ export class OrderComponent implements OnInit {
                   this.orderMenuData = data
                   console.log(data)
                   this.isLoading = false;
-                  let newEvent = {
+                  let newEvent = { 
                     orderListData:this.orderListData,
                     orderMenuData:this.orderMenuData
                   }
@@ -87,6 +89,8 @@ export class OrderComponent implements OnInit {
           }
       );
   }
+
+
 
   private getAddress(){
       this.ggMapService.getAddressByCoordinate(this.lat.toString()+","+this.lng.toString())
@@ -131,4 +135,24 @@ export class OrderComponent implements OnInit {
     }
     return totalQuantity
   }
+    private getDeliveryPrice(){
+    
+        this.deliveryService.postDestination(this.lat,this.lng)
+            .subscribe(
+            data=> {
+              this.postDelivery = JSON.stringify(data);
+              this.deliveryPrice = data.price;
+              console.log(data.price)
+              console.log("aaaaaaaa"+this.postDelivery)
+              
+            },
+            error => {
+               console.error("Cannnot get deliveryPrice!")
+            }
+        
+          )
+  }
+
+  
+
 }

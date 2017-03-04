@@ -49,6 +49,6 @@
 <app-modal #mapModal [title]="mapTitle">
   <div>
     <app-map #map></app-map>
-    <button class="btn btn-primary" (click)="selectAddress(map.lat,map.lng); mapModal.hideChildModal(); getAddress();" >OK</button>
+    <button class="btn btn-primary" (click)="selectAddress(map.lat,map.lng);getDeliveryPrice(); mapModal.hideChildModal(); getAddress();" >OK</button>
   </div>
 </app-modal>

@@ -35,6 +35,7 @@ export class MapComponent implements OnInit {
     };
     this.lat = $event.coords.lat;
     this.lng = $event.coords.lng;
+   
   }
     // markerDragEnd(m:Array<Object>, $event: any) {
     // console.log('dragEnd', m, $event);
