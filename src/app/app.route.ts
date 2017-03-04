@@ -1,6 +1,7 @@
 import {Routes, RouterModule} from "@angular/router";
 import { ModalComponent } from './modal/modal.component'
 import {MenubarComponent} from "./menubar/menubar.component";
+import {KitchenOrderComponent} from "./kitchen-order/kitchen-order.component";
 import {BodyComponent} from "./body/body.component";
 import {OrderComponent} from "./order/order.component";
 import {MapComponent} from "./map/map.component";
@@ -13,7 +14,8 @@ const APP_ROUTES: Routes = [
     canActivate: [AuthGuard]},
   { path: '#', component: BlankComponent},
   { path: 'modal', component: BodyComponent},
-  { path: 'test', component: MenubarComponent}
+  { path: 'test', component: MenubarComponent},
+  { path: 'kitchen', component: KitchenOrderComponent}
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

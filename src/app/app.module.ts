@@ -22,6 +22,7 @@ import {LocalStorageModule} from "angular-2-local-storage";
 import {UserService} from "./service/user.service";
 import {AuthGuard} from "./service/auth-guard.service";
 import { BlankComponent } from './blank.component';
+import { KitchenOrderComponent } from './kitchen-order/kitchen-order.component';
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import { BlankComponent } from './blank.component';
         MapComponent,
         OrderDetailComponent,
         BlankComponent,
+        KitchenOrderComponent,
     ],
     imports: [
         BrowserModule,
