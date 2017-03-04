@@ -142,6 +142,7 @@ export class OrderComponent implements OnInit {
             data=> {
               this.postDelivery = JSON.stringify(data);
               this.deliveryPrice = data.price;
+              this.totalPrice = this.menuPrice+this.deliveryPrice;
               console.log(data.price)
               console.log("aaaaaaaa"+this.postDelivery)
               
