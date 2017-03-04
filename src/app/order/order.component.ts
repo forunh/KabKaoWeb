@@ -40,7 +40,7 @@ export class OrderComponent implements OnInit {
       let orderList = {
         id:null,
         userId:235554,
-        price:this.menuPrice,
+        price:this.totalPrice,
         address:this.address,
         createAt:null
       };
