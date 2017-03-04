@@ -36,8 +36,23 @@ export class OrderService {
   constructor(private http: Http) {
   }
 
-  public addCurrentOrders(currentOrder:MenuOrder) {
-    this.currentOrders.push(currentOrder);
+  public addCurrentOrders(menu) {
+      let found = false;
+      for(let orderedMenu of this.currentOrders){
+          if(menu.id == orderedMenu.id){
+                found = true;
+             orderedMenu.quantity +=1;
+          }
+      }
+      if(found == false){
+          let newMenu = {
+            id: menu.id,
+            name: menu.name,
+            price: menu.price,
+            quantity: 1
+          }
+          this.currentOrders.push(newMenu);
+      }
   }
 
   public getCurrentOrders() {

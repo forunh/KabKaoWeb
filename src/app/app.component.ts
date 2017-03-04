@@ -30,7 +30,7 @@ export class AppComponent {
 
   onOrderBodySent(isSent: boolean) {
     if (isSent) {
-      this.menubarComponent.menuLists = [];
+      // this.menubarComponent.menuLists = [];
     }
   }
 
