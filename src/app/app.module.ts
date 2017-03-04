@@ -7,6 +7,7 @@ import {routing} from "./app.route";
 import {CollapseModule, ModalModule} from 'ng2-bootstrap';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import {LocalStorageModule} from "angular-2-local-storage";
+
 //component
 import {AppComponent} from './app.component';
 import {CollapseComponent} from './collapse/collapse.component';
