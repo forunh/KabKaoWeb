@@ -1,13 +1,22 @@
-<div *ngIf="!isOrderComplete" class="pad-left">
-  <h3>User</h3>
+
+<div class="pad-left">
+  <h2>Ordering</h2>
+  <h3>Receiver</h3>
   <div class="pad-left">
-    <br>
+    First name: {{ getUser().first_name }} <br>
+    Last name: {{ getUser().last_name }} <br>
+    Email: {{ getUser().email }} <br>
   </div>
   <h3>Address</h3>
       <div class="pad-left">
-        {{lat}},{{lng}}
+        <span >{{address}}</span>
         <br>
-        <button type="button" class="btn btn-primary" (click)="mapModal.showChildModal()" >Select Address</button>
+        <button type="button" class="btn btn-primary" (click)="selectAddress(map.marker.lat,map.marker.lng); getDeliveryPrice(); getAddress();" >Select</button>
+        <br>
+         <div>
+          <app-map #map></app-map>
+        </div>
+        <br>
       </div>
   <br>
   <h3>Menu</h3>
@@ -27,54 +36,17 @@
       <br>
       <strong>Quantity: </strong>{{calTotalQuantity()}}
       <br>
-      <strong>Menu Price: </strong>{{calTotalMenuPrice()}}
+      <strong>Menu Price: </strong>{{menuPrice}}
       <br>
-      <strong>Delivery Price: </strong>
+      <strong>Delivery Price: </strong>{{deliveryPrice}}
       <br>
-      <strong>Total Price: </strong>
+      <strong>Total Price: </strong>{{totalPrice}}
       <br>
   </div>
   <div class="pad">
-      <button type="button" class="btn btn-primary" (click)="createOrder()" [disabled]="!isSelectAddress">Confirm</button>
+      <button type="button" class="btn btn-primary" (click)="createOrder()" [disabled]="!isSelectAddress||isLoading">Confirm</button>
+      <span *ngIf="isLoading">Loading . . .</span>
   </div>
 
 </div>
 
-<div *ngIf="isOrderComplete" class="pad-left">
-  <h3>Order Detail</h3>
-  <strong>Order No.: </strong>{{orderListData.id}}
-  <br>
-  <strong>Order Time: </strong>{{toDateString(orderListData.createAt)}}  
-  <br>
-  <strong>Name: </strong>{{orderListData.userId}}
-  <br>  
-  <strong>Address: </strong>{{orderListData.address}}
-  <br>  
-  <strong>Menu:</strong>
-  <div>
-    <table>
-      <tr>
-        <th>Menu</th>
-        <th>Price</th>
-        <th>Quantity</th>
-      </tr>
-      <tr *ngFor="let orderMenu of orderMenuData ">
-        <td>{{orderMenu.menuId}}</td>
-        <td>300</td>
-        <td>{{orderMenu.quantity}}</td>
-      </tr>
-    </table>
-  </div>
-  <br>
-  <strong>Total Quantity: </strong>
-  <br>
-  <strong>Total Price: </strong>{{orderListData.price}}
-</div>
-
-<!--Map-->
-<app-modal #mapModal [title]="mapTitle">
-  <div>
-    <app-map #map></app-map>
-    <button class="btn btn-primary" (click)="selectAddress(map.lat,map.lng); mapModal.hideChildModal();" >OK</button>
-  </div>
-</app-modal>
