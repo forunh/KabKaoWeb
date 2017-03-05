@@ -27,6 +27,7 @@ import {UserService} from "./service/user.service";
 import {AuthGuard} from "./service/auth-guard.service";
 import {GgMapService} from './service/gg-map.service';
 import {DeliveryService} from './service/delivery.service';
+import { KitchenOrderComponent } from './kitchen-order/kitchen-order.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {DeliveryService} from './service/delivery.service';
         MapComponent,
         OrderDetailComponent,
         BlankComponent,
-        OrderBodyComponent
+        OrderBodyComponent,
+        KitchenOrderComponent
     ],
     imports: [
         BrowserModule,

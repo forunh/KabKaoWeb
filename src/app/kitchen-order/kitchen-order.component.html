@@ -1,0 +1,45 @@
+<div class="pad-left">
+  <h2>Kitchen Ordering</h2>
+  <br>
+  <h3>Order</h3>
+  <div *ngFor="let kitchenOrder of kitchenOrders ">
+    <div class="col-md-4">
+      <img src="http://1.bp.blogspot.com/-y7nnvjQKgPs/VpnOrOtFeHI/AAAAAAAAErQ/OK3oCo41PHA/s1600/5058962-3x2-940x627.jpg" width="400" height="300">
+    </div>
+    <div class="col-md-8">
+      <div class="pad">
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>Order ID</th>
+              <td>{{kitchenOrder.orderid}}</td>
+            </tr>
+            <tr>
+              <th>เมนู</th>
+              <td>{{kitchenOrder.menuid}}</td>
+            </tr>
+            <tr>
+              <th>ท็อปปิ้ง</th>
+              <td>{{kitchenOrder.toppingid}}</td>
+            </tr>
+            <tr>
+              <th>ผู้สั่ง</th>
+              <td>{{kitchenOrder.userid}}</td>
+            </tr>
+            <tr>
+              <th>จำนวน</th>
+              <td>{{kitchenOrder.quantity}}</td>
+            </tr>
+            <tr>
+              <th>สถานะ</th>
+              <td>{{kitchenOrder.status}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-success" (click)="onSuccess(kitchenOrder.id)">Success</button>
+        <button type="button" class="btn btn-danger" (click)="onCancel(kitchenOrder.id)">Cancel</button>
+      </div>
+    </div>
+    <hr>
+  </div>
+</div>
