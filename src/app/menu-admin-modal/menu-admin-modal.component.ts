@@ -35,6 +35,8 @@ export class MenuAdminModalComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log("Submitting...");
+
     if(this.id != null && this.pic != null) {
       this.editMenu(this.id, this.name, this.description, this.price, this.pic.name);
     }
@@ -47,6 +49,7 @@ export class MenuAdminModalComponent implements OnInit {
     else if(this.id == null && this.pic == null) {
       this.addTopping(this.name, this.price);
     }
+    this.isSubmit = false;
   }
 
   log() {
@@ -58,10 +61,15 @@ export class MenuAdminModalComponent implements OnInit {
   }
 
   public addMenu(name: string, description: string, price: number, objkey: string){
-    let response = this.http.post(this.url + "/add/menu", {name: name, description: description, price: price, objkey: objkey}, 
+    console.log("adding menu...");
+    let response = this.http.post(this.url + "/add/menu", {name: name, description: description, price: price, objkey: objkey},
     {headers: new Headers({'Content-Type': 'application/json'})});
-    response.subscribe(res => console.log(res.status));
-    response.map((res:Response) => res.json()).subscribe(data => {console.log(data.success);});
+    response.subscribe(res => console.log("add menu POST status: " + res.status));
+    response.map((res:Response) => res.json()).subscribe(data => {
+      if(data.success == false) console.log("add obj status: " +
+        data.success + ":" + data.errorMessage.message);
+      else console.log("add obj status: " + data.success);
+    });
     this.putPhoto(objkey);
   }
 
@@ -72,7 +80,7 @@ export class MenuAdminModalComponent implements OnInit {
   }
 
   public editMenu(id:number, name:string, description:string, price:number, objkey:string){
-    console.log('editMenu');
+    console.log('editting Menu...');
     let response = this.http.post(this.url + "/add/menu", {id: id, name: name, description: description, price: price, objkey: objkey});
     response.subscribe(res => console.log(res.status));
     response.map((res:Response) => res.json()).subscribe(data => {console.log(data.success);});
@@ -87,7 +95,7 @@ export class MenuAdminModalComponent implements OnInit {
 
   public putPhoto(objkey: string){
     let response = this.http.get(this.url + "/upload?objkey=" + objkey);
-    response.subscribe(res => console.log(res.status));
+    response.subscribe(res => console.log("Put photo status: " + res.status));
     response.map((res:Response) => res.json()).subscribe(data => {
       this.http.put(data.payload, this.pic, {headers: new Headers({'Content-Type': 'image/jpeg'})}).subscribe();
     });
