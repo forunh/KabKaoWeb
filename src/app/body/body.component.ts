@@ -10,6 +10,7 @@ export class BodyComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(JSON.stringify(localStorage.getItem('user')));
   }
 
 

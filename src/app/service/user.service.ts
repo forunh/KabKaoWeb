@@ -3,6 +3,7 @@ import {Http, Response, Headers, URLSearchParams} from "@angular/http";
 import {LocalStorageService} from "angular-2-local-storage";
 import 'rxjs/Rx';
 import {Observable} from "rxjs";
+import { User } from '../model/user';
 
 @Injectable()
 export class UserService {
@@ -91,5 +92,10 @@ export class UserService {
 
   public getMyUserData() {
     return this.currentUser;
+  }
+
+  public addUser(user: User) {
+      return this.http.post('http://52.187.62.107:10300/authen/sign_up', JSON.stringify(user), {headers: new Headers({'Content-Type': 'application/json'})})
+              .map((res: Response) => res.json());
   }
 }

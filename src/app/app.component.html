@@ -20,7 +20,7 @@
               <br>
               <div>
                 <button type="button" class="btn btn-info marleft" (click)="login()">Login</button> <span style="font-size: 75%">or</span>
-                <button type="button" class="btn btn-primary">Sign Up</button>
+                <button type="button" class="btn btn-primary" (click)="signup.openModal()">Sign Up</button>
               </div>
             </div>
         </div>
@@ -34,3 +34,6 @@
 <!--</div>-->
 <app-menubar #menubar (onClickCheckout)="onClickCheckout($event)" *ngIf="getLoginStatus()"></app-menubar>
 <router-outlet></router-outlet>
+
+<!--signup modal-->
+<app-signup #signup></app-signup>

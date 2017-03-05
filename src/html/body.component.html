@@ -1,0 +1,10 @@
+<div *ngIf="isOrder">
+    <order></order>
+</div>
+
+<div>
+    <button (click)="getExample()">Call Service Example</button>
+    <div *ngIf="foursquareData">
+        {{foursquareData.response.venue.name}}
+    </div>
+</div>
