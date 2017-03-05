@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Response } from '@angular/http';
+import { KitchenService } from '../service/kitchen.service';
 // import { KitchenOrder } from '../model/kitchenOrder';
 
 @Component({
   selector: 'app-kitchen-order',
   templateUrl: './kitchen-order.component.html',
-  styleUrls: ['./kitchen-order.component.css']
+  styleUrls: ['./kitchen-order.component.css'],
+  providers: [KitchenService]
 })
 export class KitchenOrderComponent implements OnInit {
 
@@ -37,11 +40,18 @@ kitchenOrders = [
      timestamp:null
 }];
 
-  constructor() { 
+  constructor(private kitchenService: KitchenService) { 
     
   }
 
   ngOnInit() {
+    this.kitchenService.getWaitingOrder()
+      .subscribe(
+        (data: any) => console.log(data)
+    );
+  }
+
+  onSuccess(id : number){
     
   }
 
