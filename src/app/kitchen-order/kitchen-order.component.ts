@@ -12,16 +12,50 @@ import { KitchenService } from '../service/kitchen.service';
 export class KitchenOrderComponent implements OnInit {
 
 kitchenOrders = [];
+menuOrders = [];
+imgMenu = [];
+initialized = false;
 
   constructor(private kitchenService: KitchenService) { 
     
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.initialized = true;
+    }, 1000)
+    this.loadComponent();
+  }
+
+  loadComponent(){
     this.kitchenService.getWaitingOrder()
       .subscribe(
-        (data: any) => this.kitchenOrders = data
+        (data: any) =>{ 
+          this.kitchenOrders = data
+          this.imgMenu = new Array(this.kitchenOrders.length)
+          this.menuOrders = new Array(this.kitchenOrders.length)
+          this.kitchenOrders.forEach((item, idx) => {
+            this.kitchenService.getMenuByMenuId(this.kitchenOrders[idx].menuid).subscribe(
+              (data: any) => {
+                this.menuOrders[idx] = data.payload;
+                console.log(this.menuOrders);
+                this.kitchenService.getLinkImageMenu(data.payload.objkey).subscribe(
+                  (data: any) => {this.imgMenu[idx] = data.payload
+                  }
+                )
+              }
+            )
+          });
+      }
     );
+  }
+
+  getTopping(toppingid : number){
+    if(toppingid === 1)
+        return "ไข่ดาว";
+    else if(toppingid === 2){
+        return "ไข่เจียว";
+    }else return "ไม่มี";
   }
 
   onSuccess(item){
@@ -42,6 +76,7 @@ kitchenOrders = [];
     let index = this.kitchenOrders.indexOf(item);
     console.log(this.kitchenOrders);
     this.kitchenOrders.splice(index, 1);
+    this.imgMenu.splice(index, 1);
     console.log(this.kitchenOrders);
   }
 

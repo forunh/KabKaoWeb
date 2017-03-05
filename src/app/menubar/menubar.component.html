@@ -20,7 +20,7 @@
       <ul class="nav navbar-nav">
         <li [class.active]="isCurrentUri('')"><a [routerLink]="['']"> Menu <span class="sr-only">(current)</span></a></li>
         <li [class.active]="isCurrentUri('')" (click)="orderService.setOrderStatus(true)"><a [routerLink]="['/order']">Order</a></li>
-        <li [class.active]="isCurrentUri('kitchen')"><a [routerLink]="['/kitchen']">Kitchen</a></li>
+        <li *ngIf="getUser().is_staff" [class.active]="isCurrentUri('')"><a [routerLink]="['/kitchen']">Kitchen</a></li>
         <li [class.active]="isCurrentUri('')" ><a [routerLink]="['/history']">History</a></li>        
       </ul>
       <ul class="nav navbar-nav navbar-right">
