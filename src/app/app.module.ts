@@ -32,7 +32,7 @@ import {DeliveryService} from './service/delivery.service';
 import { KitchenOrderComponent } from './kitchen-order/kitchen-order.component';
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 import { MenuAdminModalComponent } from './menu-admin-modal/menu-admin-modal.component';
-
+import {MenuNameService} from './service/menu-name.service';
 
 @NgModule({
     declarations: [
@@ -67,7 +67,7 @@ import { MenuAdminModalComponent } from './menu-admin-modal/menu-admin-modal.com
         PopoverModule
         // GoogleplaceDirective
     ],
-    providers: [OrderService, UserService, AuthGuard,GgMapService,DeliveryService],
+    providers: [OrderService, UserService, AuthGuard,GgMapService,DeliveryService,MenuNameService],
 
     bootstrap: [AppComponent]
 })

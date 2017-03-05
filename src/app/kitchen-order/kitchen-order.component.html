@@ -1,17 +1,14 @@
-<p>
-  kitchen-order works!
-</p>
-<div class="pad-left">
+<div *ngIf="initialized" class="pad-left" >
   <h2>Kitchen Ordering</h2>
   <br>
   <h3>Order</h3>
-  <div *ngFor="let kitchenOrder of kitchenOrders " class="row">
+  <div *ngFor="let kitchenOrder of kitchenOrders;let ind = index " class="row">
     <div>
     <div class="col-md-4">
-      <img src="http://1.bp.blogspot.com/-y7nnvjQKgPs/VpnOrOtFeHI/AAAAAAAAErQ/OK3oCo41PHA/s1600/5058962-3x2-940x627.jpg" width="400" height="300">
+      <img [src]=imgMenu[ind] width="400" height="300">
     </div>
     <div class="col-md-6">
-      <div class="pad">
+      <div class="pad-down">
         <table class="table">
           <tbody>
             <tr>
@@ -20,11 +17,11 @@
             </tr>
             <tr>
               <th>เมนู</th>
-              <td>{{kitchenOrder.menuid}}</td>
+              <td>{{menuOrders[ind].name}}</td>
             </tr>
             <tr>
               <th>ท็อปปิ้ง</th>
-              <td>{{kitchenOrder.toppingid}}</td>
+              <td>{{getTopping(kitchenOrder.toppingid)}}</td>
             </tr>
             <tr>
               <th>ผู้สั่ง</th>

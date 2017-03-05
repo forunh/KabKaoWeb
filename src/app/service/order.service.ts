@@ -13,19 +13,19 @@ export class OrderService {
 
   private currentOrders: Array<MenuOrder> = [
     {
-      id: 1,
+      id: 15,
       name: "ข้าวผัด",
       price: 40,
       quantity: 1
     },
     {
-      id: 2,
+      id: 23,
       name: "ข้าวกระเพรา",
       price: 80,
       quantity: 2
     },
     {
-      id: 4,
+      id: 65,
       name: "ข้าวต้ม",
       price: 30,
       quantity: 1
