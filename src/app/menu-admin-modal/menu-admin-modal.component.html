@@ -14,10 +14,10 @@
     </div>
     <div class="form-group">
       <label for="pic">Upload Picture</label>
-      <input type="file" id="pic">
+      <input type="file" id="pic" (change)="picChange($event)">
     </div>
     <div class="form-group" style="text-align: right">
-      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="submit" (click)="onSubmit()" class="btn btn-primary">Save</button>
     </div>
   </form>
 

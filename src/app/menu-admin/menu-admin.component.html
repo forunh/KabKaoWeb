@@ -7,10 +7,11 @@
       <div class="caption">
         <h3>{{item.name}} ราคา {{item.price}} บาท</h3>
         <p >{{item.description}}</p>
-        <p><a href="#" class="btn btn-default" role="button">Edit</a> <a href="#" class="btn btn-danger" role="button" (click)="removeMenu(item.id, i)">Remove</a></p>
+        <p><a href="#" class="btn btn-default" (click)="modal.showModal()" role="button">Edit</a> <a href="#" class="btn btn-danger" role="button" (click)="removeMenu(item.id, i)">Remove</a></p>
       </div>
     </div>
   </div>
+  <app-menu-admin-modal #modal [id]='item.id' [name]='item.name' [description]='item.description' [price]='item.price' ></app-menu-admin-modal>
 </div>
 <br/>
 
@@ -19,4 +20,6 @@
   <h2>{{item.name}} ราคา {{item.price}} </h2><br/><a href="#" class="btn btn-default" role="button">Edit</a> <a href="#" class="btn btn-danger" role="button" (click)="removeTopping(item.id, i)">Remove</a>
 </div>
 
-<app-menu-admin-modal [show]="true"></app-menu-admin-modal>
+<button (click)='modal.showModal()'>click</button>
+<button (click)='modal.log()'>log</button>
+

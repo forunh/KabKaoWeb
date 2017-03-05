@@ -44,7 +44,7 @@ import { MenuAdminModalComponent } from './menu-admin-modal/menu-admin-modal.com
         OrderDetailComponent,
         BlankComponent,
         OrderBodyComponent,
-        SignUpComponent
+        SignUpComponent,
         MenuAdminComponent,
         MenuAdminModalComponent
     ],

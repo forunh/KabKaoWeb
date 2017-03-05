@@ -98,4 +98,28 @@ export class MenuAdminComponent implements OnInit {
       }
     })
   }
+
+  public addMenu(name:string, description:string, price:number, objkey:string){
+    let response = this.http.post(this.url + "/add/menu", {name: name, description: description, price: price, objkey: objkey});
+    response.subscribe(res => console.log(res.status));
+    response.map((res:Response) => res.json()).subscribe(data => {console.log(data.success);});
+  }
+
+  public addTopping(name:string, price:number){
+    let response = this.http.post(this.url + "/add/topping", {name: name, price: price});
+    response.subscribe(res => console.log(res.status));
+    response.map((res:Response) => res.json()).subscribe(data => {console.log(data.success);});
+  }
+
+  public editMenu(id:number, name:string, description:string, price:number, objkey:string){
+    let response = this.http.post(this.url + "/add/menu", {id: id, name: name, description: description, price: price, objkey: objkey});
+    response.subscribe(res => console.log(res.status));
+    response.map((res:Response) => res.json()).subscribe(data => {console.log(data.success);});
+  }
+
+  public editTopping(id:number, name:string, price:number){
+    let response = this.http.post(this.url + "/add/topping", {id: id, name: name, price: price});
+    response.subscribe(res => console.log(res.status));
+    response.map((res:Response) => res.json()).subscribe(data => {console.log(data.success);});
+  }
 }
