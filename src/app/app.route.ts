@@ -12,7 +12,7 @@ import {HistoryComponent} from './history/history.component';
 
 
 const APP_ROUTES: Routes = [
-  { path: '', component: MapComponent,
+  { path: '', component: BodyComponent,
     canActivate: [AuthGuard]},
   { path: '#', component: BlankComponent},
   { path: 'test', component: MenubarComponent},
