@@ -21,6 +21,7 @@ import {OrderDetailComponent} from './order-detail/order-detail.component'
 import { BlankComponent } from './blank.component';
 import {OrderBodyComponent} from './order-body/order-body.component'
 import {SignUpComponent} from './signup/signup.component';
+import {HistoryComponent} from './history/history.component';
 
 //service
 import {OrderService} from './service/order.service';
@@ -42,7 +43,8 @@ import {DeliveryService} from './service/delivery.service';
         OrderDetailComponent,
         BlankComponent,
         OrderBodyComponent,
-        SignUpComponent
+        SignUpComponent,
+        HistoryComponent
     ],
     imports: [
         BrowserModule,
