@@ -1,15 +1,22 @@
 
 <div class="pad-left">
   <h2>Ordering</h2>
-  <h3>User</h3>
+  <h3>Receiver</h3>
   <div class="pad-left">
-    <br>
+    First name: {{ getUser().first_name }} <br>
+    Last name: {{ getUser().last_name }} <br>
+    Email: {{ getUser().email }} <br>
   </div>
   <h3>Address</h3>
       <div class="pad-left">
-        {{lat}},{{lng}}
+        <span >{{address}}</span>
         <br>
-        <button type="button" class="btn btn-primary" (click)="mapModal.showChildModal()" >Select Address</button>
+        <button type="button" class="btn btn-primary" (click)="selectAddress(map.marker.lat,map.marker.lng); getDeliveryPrice(); getAddress();" >Select</button>
+        <br>
+         <div>
+          <app-map #map></app-map>
+        </div>
+        <br>
       </div>
   <br>
   <h3>Menu</h3>
@@ -29,11 +36,11 @@
       <br>
       <strong>Quantity: </strong>{{calTotalQuantity()}}
       <br>
-      <strong>Menu Price: </strong>{{calTotalMenuPrice()}}
+      <strong>Menu Price: </strong>{{menuPrice}}
       <br>
-      <strong>Delivery Price: </strong>
+      <strong>Delivery Price: </strong>{{deliveryPrice}}
       <br>
-      <strong>Total Price: </strong>
+      <strong>Total Price: </strong>{{totalPrice}}
       <br>
   </div>
   <div class="pad">
@@ -43,12 +50,3 @@
 
 </div>
 
-
-
-<!--Map-->
-<app-modal #mapModal [title]="mapTitle">
-  <div>
-    <app-map #map></app-map>
-    <button class="btn btn-primary" (click)="selectAddress(map.lat,map.lng); mapModal.hideChildModal();" >OK</button>
-  </div>
-</app-modal>

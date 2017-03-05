@@ -1,31 +1,70 @@
-<div class="bar">
-  <span class="logoSmall">KABKAO</span>
-  <img class="padleft5" src="https://image.flaticon.com/icons/svg/308/308833.svg" (click)="childModal.showChildModal()" style="cursor: pointer;width:40px;height:40px; ">
-  <app-modal #childModal [title]="OrderTitle">
-    <div>
-      <h3>Menu</h3>
-       <table>
-        <tr>
-          <th>Menu</th>
-          <th>Price</th>
-          <th>Quantity</th>
-        </tr>
-        <tr *ngFor="let menuList of menuLists ">
-          <td>{{menuList.name}}</td>
-          <td>{{menuList.price}}</td>
-          <td>{{menuList.quantity}}</td>
-        </tr>
-      </table>
-      <br>
-      <h3>Total</h3>
-      Quantity: {{calTotalQuantity()}}
-      <br>
-      Price: {{calTotalPrice()}}
-      <br>
-      <br>
-      <button type="button" class="btn btn-primary" (click)="checkOut(); childModal.hideChildModal();">Checkout</button>
+<!--<div class="bar">-->
+  <!--<span class="logoSmall">KABKAO</span>-->
+  <!--<div class="btn-group">-->
+    <!--<label class="btn btn-primary">Left</label>-->
+    <!--<label class="btn btn-primary">Middle</label>-->
+    <!--<label class="btn btn-primary">Right</label>-->
+  <!--</div>-->
+  <!--<span><a href="/modal"><button class="btn btn-primary">click me!!</button></a></span>-->
+  <!--<span><a href="/test"><button class="btn btn-primary">click me!!2</button></a></span>-->
+  <!--<img class="padleft5" src="https://image.flaticon.com/icons/svg/308/308833.svg" (click)="childModal.showChildModal()" style="cursor: pointer;width:40px;height:40px; ">-->
+<!--</div>-->
 
+<nav class="navbar navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" [routerLink]="['']" style="color: #f7d08a; font-size: 200%">KABKAO</a>
     </div>
 
-  </app-modal>
-</div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li [class.active]="isCurrentUri('')"><a [routerLink]="['']"> Menu <span class="sr-only">(current)</span></a></li>
+        <li [class.active]="isCurrentUri('body')" (click)="orderService.setOrderStatus(true)"><a [routerLink]="['/order']">Order</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li (click)="childModal.showChildModal()"><img class="padleft5" alt="Brand" src="https://image.flaticon.com/icons/svg/308/308833.svg" style="cursor: pointer;width: 45px;height: 45px;padding-top: 15px; "></li>
+        <li *ngIf="getUser()" style="cursor: pointer; padding-right: 60px;">
+          <popover-content #myPopover style="color: #5b5941"
+            [closeOnClickOutside]="true">
+            <strong>Name: </strong>{{getUser().first_name}} {{getUser().last_name}}
+            <br>
+            <strong>Email: </strong>{{getUser().email}}
+            <br>
+            <br>
+            <button class="btn" style="background-color: #f7d08a;" (click)="logout()">Log out</button>
+          </popover-content>
+          <a [popover]="myPopover">hi {{getUser().first_name}}</a>
+        </li>
+        <!--<li (click)="logout()"><a>Log out</a></li>-->
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<app-modal #childModal [title]="OrderTitle">
+  <div>
+    <h3>Menu</h3>
+    <table>
+      <tr>
+        <th>Menu</th>
+        <th>Price</th>
+        <th>Quantity</th>
+      </tr>
+      <tr *ngFor="let menuList of orderService.getCurrentOrders() ">
+        <td>{{menuList.name}}</td>
+        <td>{{menuList.price}}</td>
+        <td>{{menuList.quantity}}</td>
+      </tr>
+    </table>
+    <br>
+    <h3>Total</h3>
+    Quantity: {{orderService.calTotalQuantity()}}
+    <br>
+    Price: {{orderService.calTotalPrice()}}
+    <br>
+    <br>
+    <button type="button" class="btn btn-primary" (click)="checkOut(); childModal.hideChildModal();">Checkout</button>
+
+  </div>
+
+</app-modal>
