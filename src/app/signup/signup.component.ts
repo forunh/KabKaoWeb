@@ -32,7 +32,7 @@ export class SignUpComponent {
             // tslint:disable-next-line:max-line-length
             this.user = new User(null, this.username, this.password, this.confirm_password, this.first_name, this.last_name, this.email, this.address);
             this.signUpService.addUser(this.user).subscribe(data => {
-                localStorage.setItem('user', data);
+                console.log('complete');
             }, error => {
                 this.message = error.json().error.message;
             });
@@ -50,7 +50,6 @@ export class SignUpComponent {
             this.message = 'SignUp is completed.';
             this.isValid = false;
         }
-        console.log(localStorage.getItem('user').token);
     }
 
     openModal() {
