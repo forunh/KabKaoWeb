@@ -26,7 +26,6 @@ export class MenuAdminModalComponent implements OnInit {
 
   ngOnInit() {
     this.message = 'Save complete.';
-    console.log('Hi');
   }
 
   showModal() {
@@ -122,7 +121,7 @@ export class MenuAdminModalComponent implements OnInit {
     let response = this.http.get(this.url + "/upload?objkey=" + objkey, {headers: new Headers({'Content-Type': 'application/json',  'Authorization': this.userService.getUserToken()})});
     response.subscribe(res => console.log("Put photo status: " + res.status));
     response.map((res:Response) => res.json()).subscribe(data => {
-      this.http.put(data.payload, this.pic, {headers: new Headers({'Content-Type': 'image/jpeg', 'Authorization': this.userService.getUserToken()})}).subscribe();
+      this.http.put(data.payload, this.pic, {headers: new Headers({'Content-Type': 'image/jpeg'})}).subscribe();
     });
   }
 

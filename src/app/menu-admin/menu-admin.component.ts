@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {Http, Response, RequestOptions, Headers, Request, RequestMethod} from '@angular/http';
 import {Topping} from "../model/topping";
 import {Menu} from "../model/menu";
 import { UserService } from '../service/user.service';
+import { OrderService } from '../service/order.service';
 
 @Component({
   selector: 'app-menu-admin',
@@ -13,11 +14,14 @@ export class MenuAdminComponent implements OnInit {
 
   private url = "http://kabkao-com-menu-2.ap-southeast-1.elasticbeanstalk.com/api";
   //private url = "http://localhost:5000/api"
-  constructor(private http:Http, private userService: UserService) { }
+  constructor(private http:Http, private userService: UserService, private orderService: OrderService) { }
   menuList: Menu[];
   toppingList: Topping[];
   photoList;
   notAdmin = true;
+  @Input() id: number;
+  @Input() name: string;
+  @Input() price: number;
 
   ngOnInit() {
     this.getAllMenu();
@@ -31,9 +35,7 @@ export class MenuAdminComponent implements OnInit {
         }
     })
   }
-check() {
-     console.log(this.userService.getUserToken());
-  }
+
   public getAllMenu(){
     console.log("getting menus...");
     let response = this.http.get(this.url+'/view/menu');
@@ -109,5 +111,9 @@ check() {
         console.warn("Failed to remove Topping id[" + id + "].");
       }
     })
+  }
+
+  public addToCart(id: number, name: string, price: number) {
+    this.orderService.addCurrentOrders({id: id, name: name, price: price});
   }
 }
