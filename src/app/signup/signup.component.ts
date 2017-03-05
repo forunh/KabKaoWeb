@@ -1,8 +1,9 @@
 import { Component, Input, ViewChild, OnInit} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { User } from '../model/user';
-import { SignUpService } from '../service/signup.service';
+import { UserService } from '../service/user.service';
 import { ModalComponent } from '../modal/modal.component';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-signup',
@@ -25,43 +26,46 @@ export class SignUpComponent {
     email: string;
     address: string;
 
-    constructor(private signUpService: SignUpService) { }
+    constructor(private userService: UserService) { }
 
-    onSubmit() {
+    public onSubmit() {
         if (this.password === this.confirm_password) {
             // tslint:disable-next-line:max-line-length
-            this.user = new User(null, this.username, this.password, this.confirm_password, this.first_name, this.last_name, this.email, this.address);
-            this.signUpService.addUser(this.user).subscribe(data => {
-                console.log('complete');
-            }, error => {
-                this.message = error.json().error.message;
-            });
             this.isValid = true;
-            this.hiddenCfPassMatch = true;
-            this.username = null;
-            this.password = null;
-            this.confirm_password = null;
-            this.first_name = null;
-            this.last_name = null;
-            this.email = null;
-            this.address = null;
+            this.user = new User(null, this.username, this.password, this.confirm_password, this.first_name, this.last_name, this.email, this.address);
+            this.userService.addUser(this.user).catch(this.handleError).subscribe(data => {
+                console.log('complete');
+                this.message = 'Signup complete.';
+                this.hiddenCfPassMatch = true;
+                this.username = null;
+                this.password = null;
+                this.confirm_password = null;
+                this.first_name = null;
+                this.last_name = null;
+                this.email = null;
+                this.address = null;
+            }, error => {
+                this.message = error.error.message;
+            });
         } else {
             this.hiddenCfPassMatch = false;
-            this.message = 'SignUp is completed.';
-            this.isValid = false;
         }
     }
 
-    openModal() {
+    public openModal() {
         this.isValid = false;
         this.modalComponent.showChildModal();
     }
 
-    closeModal() {
+    public closeModal() {
         this.modalComponent.hideChildModal();
     }
 
-    clearAlert() {
+    public clearAlert() {
         this.hiddenCfPassMatch = true;
+    }
+
+    handleError(error: any) {
+        return Observable.throw(error.json());
     }
 }
