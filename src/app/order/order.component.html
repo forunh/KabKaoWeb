@@ -9,14 +9,12 @@
   </div>
   <h3>Address</h3>
       <div class="pad-left">
-        <span >{{address}}</span>
-        <br>
-        <button type="button" class="btn btn-primary" (click)="selectAddress(map.marker.lat,map.marker.lng); getDeliveryPrice(); getAddress();" >Select</button>
         <br>
          <div>
           <app-map #map></app-map>
         </div>
-        <br>
+        <button type="button" class="btn btn-primary" (click)="selectAddress(map.marker.lat,map.marker.lng); getDeliveryPrice(); getAddress();" >Select</button>
+        <span >{{address}}</span>
       </div>
   <br>
   <h3>Menu</h3>
