@@ -18,6 +18,7 @@ import { MapComponent } from './map/map.component';
 
 import {OrderService} from './service/order.service';
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
+import { MenuAdminModalComponent } from './menu-admin-modal/menu-admin-modal.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import { MenuAdminComponent } from './menu-admin/menu-admin.component';
         ModalComponent,
         BodyComponent,
         MapComponent,
-        MenuAdminComponent
+        MenuAdminComponent,
+        MenuAdminModalComponent
     ],
     imports: [
         BrowserModule,
