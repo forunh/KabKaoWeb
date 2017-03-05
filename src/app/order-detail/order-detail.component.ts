@@ -22,8 +22,8 @@ export class OrderDetailComponent implements OnInit {
   ngOnInit() {
   }
 
-  private toDateString(utcDate){
-    return new Date(utcDate).toDateString()+new Date(utcDate).toTimeString()
+    private toDateString(utcDate){
+    return new Date(utcDate).toDateString()+" "+new Date(utcDate).toTimeString().substring(0, 8)
   }
 
   clearOrderDetail(){

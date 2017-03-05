@@ -1,3 +1,22 @@
-<p>
-  history works!
-</p>
+<div class="pad-left" *ngIf="getUser()">
+      <h2>Order History</h2>
+      <div class="pad-left">
+        <strong> Name:</strong> {{ getUser().first_name }} {{ getUser().last_name }} <br>
+        <strong> Email:</strong> {{ getUser().email }} <br>
+      </div>
+      <br>
+      <table>
+        <tr>
+          <th>OrderId</th>
+          <th>Price</th>
+          <th>Order Date</th>
+          <th>Status</th>
+        </tr>
+        <tr *ngFor="let order of allOrder;">
+          <td>{{order.id}}</td>
+          <td>{{order.price}}</td>
+          <td>{{toDateString(order.createAt)}}</td>
+          <td>success</td>          
+        </tr>
+      </table>
+  </div>

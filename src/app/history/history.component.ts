@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderService } from '../service/order.service';
+import {UserService} from "../service/user.service";
 
 @Component({
   selector: 'app-history',
@@ -7,9 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryComponent implements OnInit {
 
-  constructor() { }
+  allOrder= [];
+
+  constructor(private orderService:OrderService, private userService: UserService) { 
+
+  }
 
   ngOnInit() {
+    let userId = this.getUser().id;
+    this.orderService.getOrderListByUserId(userId)
+    .subscribe(
+            data=> {
+              this.allOrder = data;
+              // console.log(data);
+
+            },
+            error => {
+               console.error("Cannnot get history!")
+            }
+    )
+  }
+
+  private toDateString(utcDate){
+    return new Date(utcDate).toDateString()+" "+new Date(utcDate).toTimeString().substring(0, 8)
+  }
+
+  private getUser() {
+      return this.userService.getMyUserData();
   }
 
 }
