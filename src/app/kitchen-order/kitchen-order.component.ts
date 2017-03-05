@@ -11,34 +11,7 @@ import { KitchenService } from '../service/kitchen.service';
 })
 export class KitchenOrderComponent implements OnInit {
 
-kitchenOrders = [
-    { id: 1000,
-     orderid:1000,
-     menuid:2,
-     toppingid:0,
-     userid:1412,
-     quantity:1,
-     status:"waiting",
-     timestamp:null
-},
-    { id: 1001,
-     orderid:1001,
-     menuid:3,
-     toppingid:1,
-     userid:1412,
-     quantity:2,
-     status:"waiting",
-     timestamp:null
-},
-    {id: 1002,
-     orderid:1002,
-     menuid:1,
-     toppingid:2,
-     userid:1413,
-     quantity:3,
-     status:"waiting",
-     timestamp:null
-}];
+kitchenOrders = [];
 
   constructor(private kitchenService: KitchenService) { 
     
@@ -47,13 +20,42 @@ kitchenOrders = [
   ngOnInit() {
     this.kitchenService.getWaitingOrder()
       .subscribe(
-        (data: any) => console.log(data)
+        (data: any) => this.kitchenOrders = data
     );
   }
 
-  onSuccess(id : number){
-    
+  onSuccess(item){
+    this.kitchenService.putSuccessStatus(item.id).subscribe(
+      (response) => {console.log(response);console.log('success');this.deleteOrder(item);}, 
+      (error) => {console.log(error);console.log('error')}
+    );
   }
 
+  onCancel(item){
+    this.kitchenService.putCancelStatus(item.id).subscribe(
+      (response) => {console.log(response);console.log('success');this.deleteOrder(item);}, 
+      (error) => {console.log(error);console.log('error')}
+    );
+  }
 
+  deleteOrder(item){
+    let index = this.kitchenOrders.indexOf(item);
+    console.log(this.kitchenOrders);
+    this.kitchenOrders.splice(index, 1);
+    console.log(this.kitchenOrders);
+  }
+
+  onAdd(){
+    this.kitchenService.addOrderMenu({
+      "orderid":555,
+      "menuid":555,
+      "toppingid":555,
+      "quantity":555,
+      "userid":555,
+      "status":"waiting"
+    }).subscribe(
+        (data: any) => console.log(data)
+    );
+  }
 }
+
