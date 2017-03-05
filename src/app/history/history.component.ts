@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../service/order.service';
 import {UserService} from "../service/user.service";
+import {Order} from '../model/order';
 
 @Component({
   selector: 'app-history',
@@ -9,8 +10,7 @@ import {UserService} from "../service/user.service";
 })
 export class HistoryComponent implements OnInit {
 
-  allOrder= [];
-  allMenu=[]
+  allOrder:Array<Order> = [];
   isLoading = true;
 
   constructor(private orderService:OrderService, private userService: UserService) { 
@@ -21,11 +21,12 @@ export class HistoryComponent implements OnInit {
     this.isLoading=true;
     
     let userId = this.getUser().id;
-    this.orderService.getOrderListByUserId(userId)
+    this.orderService.getOrderByUserId(userId)
     .subscribe(
             data=> {
+              console.log(data);
+              
               this.allOrder = data;
-              // console.log(data);
             
               this.isLoading=false;
               
