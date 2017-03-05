@@ -1,3 +1,4 @@
+
 <h1><span class="label label-default">MENU</span></h1>
 <div *ngFor="let item of menuList; let i = index;" class="row">
   <div class="col-md-4">
@@ -17,7 +18,3 @@
 <div *ngFor="let item of toppingList" class="well col-sm-6 col-md-4">
   <h2>{{item.name}} ราคา {{item.price}} </h2><br/><a href="#" class="btn btn-default" role="button">Edit</a> <a href="#" class="btn btn-danger" role="button" (click)="removeTopping(item.id, i)">Remove</a>
 </div>
-
-<label class="btn btn-default btn-file">
-  Browse <input type="file" hidden>
-</label>

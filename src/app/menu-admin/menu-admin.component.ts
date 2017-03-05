@@ -10,7 +10,8 @@ import {Menu} from "../model/menu";
 })
 export class MenuAdminComponent implements OnInit {
 
-  private url = "http://localhost:5000";
+  private url = "http://kabkao-com-menu-2.ap-southeast-1.elasticbeanstalk.com/api";
+  //private url = "http://localhost:5000/api"
   constructor(private http:Http) { }
   menuList: Menu[];
   toppingList: Topping[];
@@ -22,12 +23,16 @@ export class MenuAdminComponent implements OnInit {
   }
 
   public getAllMenu(){
-    this.http.get(this.url+'/view/menu').map((res:Response) => res.json()).subscribe(data => {
+    console.log("getting menus...");
+    let response = this.http.get(this.url+'/view/menu');
+    console.log(response.map(res => res.json()));
+    response.map((res:Response) => res.json()).subscribe(data => {
       if(data.success == false){
         console.log("Failed to retrieve menu list.");
         return;
       }
       else {
+        console.log("got menus!");
         this.menuList = data.payload;
         console.log(this.menuList);
         this.photoList = new Array(this.menuList.length);
@@ -39,12 +44,16 @@ export class MenuAdminComponent implements OnInit {
   }
 
   public getAllTopping(){
-    this.http.get(this.url+'/view/topping').map((res:Response) => res.json()).subscribe(data => {
+    console.log("getting toppings...");
+    let response = this.http.get(this.url+'/view/topping');
+    response.subscribe(res => console.log(res.status));
+    response.map((res:Response) => res.json()).subscribe(data => {
       if(data.success == false){
         console.log("Failed to retrieve topping list.");
         return;
       }
       else {
+        console.log("got toppings!");
         this.toppingList = data.payload;
         console.log(this.toppingList);
       }
@@ -52,7 +61,8 @@ export class MenuAdminComponent implements OnInit {
   }
 
   public getPhoto(objkey:string, index:number) {
-    this.http.get(this.url + '/download?objkey=' + objkey).map(res => res.json()).subscribe(data => {
+    let response = this.http.get(this.url + '/download?objkey=' + objkey);
+    response.map(res => res.json()).subscribe(data => {
       if(data.success == true) {
         this.photoList[index] = data.payload;
       }
