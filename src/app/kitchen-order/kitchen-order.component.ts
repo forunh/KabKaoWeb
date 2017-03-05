@@ -23,7 +23,7 @@ initialized = false;
   ngOnInit() {
     setTimeout(() => {
       this.initialized = true;
-    }, 1000)
+    }, 2000)
     this.loadComponent();
   }
 
@@ -41,6 +41,7 @@ initialized = false;
                 console.log(this.menuOrders);
                 this.kitchenService.getLinkImageMenu(data.payload.objkey).subscribe(
                   (data: any) => {this.imgMenu[idx] = data.payload
+                    console.log(this.imgMenu);
                   }
                 )
               }
@@ -77,6 +78,7 @@ initialized = false;
     console.log(this.kitchenOrders);
     this.kitchenOrders.splice(index, 1);
     this.imgMenu.splice(index, 1);
+    this.menuOrders.splice(index, 1);
     console.log(this.kitchenOrders);
   }
 
