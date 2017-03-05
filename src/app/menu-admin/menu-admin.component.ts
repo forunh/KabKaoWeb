@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Http, Response, RequestOptions, Headers, Request, RequestMethod} from '@angular/http';
 import {Topping} from "../model/topping";
 import {Menu} from "../model/menu";
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-menu-admin',
@@ -12,16 +13,27 @@ export class MenuAdminComponent implements OnInit {
 
   private url = "http://kabkao-com-menu-2.ap-southeast-1.elasticbeanstalk.com/api";
   //private url = "http://localhost:5000/api"
-  constructor(private http:Http) { }
+  constructor(private http:Http, private userService: UserService) { }
   menuList: Menu[];
   toppingList: Topping[];
   photoList;
+  notAdmin = true;
 
   ngOnInit() {
     this.getAllMenu();
     this.getAllTopping();
+    this.userService.checkPermission(UserService.ADD_MENU, success => { 
+        if(success.payload.is_allowed) {
+          this.notAdmin = false;
+        }
+        else {
+          this.notAdmin = true;
+        }
+    })
   }
-
+check() {
+     console.log(this.userService.getUserToken());
+  }
   public getAllMenu(){
     console.log("getting menus...");
     let response = this.http.get(this.url+'/view/menu');

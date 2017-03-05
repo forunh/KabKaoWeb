@@ -1,6 +1,7 @@
 import {Component, OnInit, Input, ViewChild, OnChanges} from '@angular/core';
 import {ModalComponent} from '../modal/modal.component';
 import {Http, Response, RequestOptions, Headers, Request, RequestMethod} from '@angular/http';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-menu-admin-modal',
@@ -21,10 +22,11 @@ export class MenuAdminModalComponent implements OnInit {
   //private url = "http://localhost:5000/api"
   @Input() isTopping: boolean;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private userService: UserService) { }
 
   ngOnInit() {
     this.message = 'Save complete.';
+    console.log('Hi');
   }
 
   showModal() {
@@ -64,7 +66,7 @@ export class MenuAdminModalComponent implements OnInit {
     console.log("adding menu...");
     if(description == null) description = "";
     let response = this.http.post(this.url + "/add/menu", {name: name, description: description, price: price, objkey: objkey},
-    {headers: new Headers({'Content-Type': 'application/json'})});
+    {headers: new Headers({'Content-Type': 'application/json',  'Authorization': this.userService.getUserToken()})});
     response.map((res:Response) => {
       console.log("add menu POST status: " + res.status)
       return res.json();
@@ -78,7 +80,7 @@ export class MenuAdminModalComponent implements OnInit {
 
   public addTopping(name:string, price:number){
     console.log("adding topping...");
-    let response = this.http.post(this.url + "/add/topping", {name: name, price: price});
+    let response = this.http.post(this.url + "/add/topping", {name: name, price: price}, {headers: new Headers({'Content-Type': 'application/json',  'Authorization': this.userService.getUserToken()})});
     response.map((res:Response) => {
       console.log("add topping POST status: " + res.status)
       return res.json();
@@ -91,7 +93,7 @@ export class MenuAdminModalComponent implements OnInit {
 
   public editMenu(id:number, name:string, description:string, price:number, objkey:string){
     console.log('editting menu...');
-    let response = this.http.post(this.url + "/add/menu", {id: id, name: name, description: description, price: price, objkey: objkey});
+    let response = this.http.post(this.url + "/add/menu", {id: id, name: name, description: description, price: price, objkey: objkey}, {headers: new Headers({'Content-Type': 'application/json',  'Authorization': this.userService.getUserToken()})});
     response.map((res:Response) => {
       console.log("edit menu POST status: " + res.status);
       return res.json();
@@ -105,7 +107,7 @@ export class MenuAdminModalComponent implements OnInit {
 
   public editTopping(id:number, name:string, price:number){
     console.log("editting topping...");
-    let response = this.http.post(this.url + "/add/topping", {id: id, name: name, price: price});
+    let response = this.http.post(this.url + "/add/topping", {id: id, name: name, price: price}, {headers: new Headers({'Content-Type': 'application/json',  'Authorization': this.userService.getUserToken()})});
     response.map((res:Response) => {
       console.log("edit topping POST status: " + res.status);
       return res.json();
@@ -117,10 +119,10 @@ export class MenuAdminModalComponent implements OnInit {
   }
 
   public putPhoto(objkey: string){
-    let response = this.http.get(this.url + "/upload?objkey=" + objkey);
+    let response = this.http.get(this.url + "/upload?objkey=" + objkey, {headers: new Headers({'Content-Type': 'application/json',  'Authorization': this.userService.getUserToken()})});
     response.subscribe(res => console.log("Put photo status: " + res.status));
     response.map((res:Response) => res.json()).subscribe(data => {
-      this.http.put(data.payload, this.pic, {headers: new Headers({'Content-Type': 'image/jpeg'})}).subscribe();
+      this.http.put(data.payload, this.pic, {headers: new Headers({'Content-Type': 'image/jpeg', 'Authorization': this.userService.getUserToken()})}).subscribe();
     });
   }
 

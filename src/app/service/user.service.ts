@@ -104,6 +104,6 @@ export class UserService {
   }
 
   public getUserToken() {
-    return this.currentUser.token;
+    return this.localStorage.get('token');
   }
 }
