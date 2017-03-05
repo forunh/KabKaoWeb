@@ -31,7 +31,7 @@
             <strong>Email: </strong>{{getUser().email}}
             <br>
             <br>
-            <button style="background-color: #f7d08a;" (click)="logout()">Log out</button>
+            <button class="btn" style="background-color: #f7d08a;" (click)="logout()">Log out</button>
           </popover-content>
           <a [popover]="myPopover">hi {{getUser().first_name}}</a>
         </li>

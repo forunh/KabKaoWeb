@@ -1,7 +1,7 @@
 
 <div class="pad-left">
   <h2>Ordering</h2>
-  <h3>User</h3>
+  <h3>Receiver</h3>
   <div class="pad-left">
     First name: {{ getUser().first_name }} <br>
     Last name: {{ getUser().last_name }} <br>
@@ -12,7 +12,7 @@
         <span >{{address}}</span>
         <br>
         <button type="button" class="btn btn-primary" (click)="selectAddress(map.marker.lat,map.marker.lng); getDeliveryPrice(); getAddress();" >Select</button>
-        <br>        
+        <br>
          <div>
           <app-map #map></app-map>
         </div>
