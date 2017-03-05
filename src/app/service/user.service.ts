@@ -98,4 +98,12 @@ export class UserService {
       return this.http.post('http://52.187.62.107:10300/authen/sign_up', JSON.stringify(user), {headers: new Headers({'Content-Type': 'application/json'})})
               .map((res: Response) => res.json());
   }
+
+  public addAuthorizationHeader(header: Headers) {
+    header.append("Content-Type", "application/json");
+  }
+
+  public getUserToken() {
+    return this.currentUser.token;
+  }
 }
