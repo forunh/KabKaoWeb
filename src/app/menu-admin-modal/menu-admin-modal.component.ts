@@ -18,6 +18,7 @@ export class MenuAdminModalComponent implements OnInit {
   message: string;
   @ViewChild('menuAdmin') menuAdmin: ModalComponent;
   private url = "http://kabkao-com-menu-2.ap-southeast-1.elasticbeanstalk.com/api";
+  @Input() isTopping: boolean;
 
   constructor(private http: Http) { }
 
@@ -34,9 +35,17 @@ export class MenuAdminModalComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.name);
-    if(this.id != null) {
+    if(this.id != null && this.pic != null) {
       this.editMenu(this.id, this.name, this.description, this.price, this.pic.name);
+    }
+    else if(this.id == null && this.pic != null) {
+      this.addMenu(this.name, this.description, this.price, this.pic.name);
+    }
+    else if(this.id != null && this.pic == null) {
+      this.editTopping(this.id, this.name, this.price);
+    }
+    else if(this.id == null && this.pic == null) {
+      this.addTopping(this.name, this.price);
     }
   }
 
@@ -53,6 +62,7 @@ export class MenuAdminModalComponent implements OnInit {
     {headers: new Headers({'Content-Type': 'application/json'})});
     response.subscribe(res => console.log(res.status));
     response.map((res:Response) => res.json()).subscribe(data => {console.log(data.success);});
+    this.putPhoto(objkey);
   }
 
   public addTopping(name:string, price:number){
@@ -79,7 +89,7 @@ export class MenuAdminModalComponent implements OnInit {
     let response = this.http.get(this.url + "/upload?objkey=" + objkey);
     response.subscribe(res => console.log(res.status));
     response.map((res:Response) => res.json()).subscribe(data => {
-      this.http.put(data.payload, this.pic, {headers: new Headers({'Content-Type': 'image/jpeg', 'Access-Control-Allow-Origin': '*'})}).subscribe();
+      this.http.put(data.payload, this.pic, {headers: new Headers({'Content-Type': 'image/jpeg'})}).subscribe();
     });
   }
 
