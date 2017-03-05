@@ -126,6 +126,26 @@ export class OrderService {
 
     }
 
+    
+    public addOrder(order){
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers: headers});
+        let body = JSON.stringify(order);
+        console.log(body)
+        return this.http.post(this.url+'/order', body, options).map((res:Response) => res.json());
+    
+    }
+
+    public getOrderByUserId(userId){
+        return this.http.get(this.url+'/order?userid='+userId).map((res:Response) => res.json());
+
+    }
+    public getAllOrder(){
+        return this.http.get(this.url+'/all_order').map((res:Response) => res.json());
+
+    }
+
+
      public setOrderStatus(status: boolean) {
       this.isOrder = status;
     }
