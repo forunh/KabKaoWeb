@@ -1,15 +1,84 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from "@angular/http";
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import {OrderList} from '../model/orderList';
+import {MenuOrder} from '../model/menuOrder'
+
 
 @Injectable()
 export class OrderService {
 
-    private url = 'http://localhost:1234';
-    constructor(private http:Http) {
+  private url = 'http://52.187.62.107:10510';
+
+  private currentOrders:Array<MenuOrder>=[
+    {
+      id: 1,
+      name: "ข้าวผัด",
+      price: 40,
+      quantity: 1
+    },
+    {
+      id: 2,
+      name: "ข้าวกระเพรา",
+      price: 80,
+      quantity: 2
+    },
+    {
+      id: 4,
+      name: "ข้าวต้ม",
+      price: 30,
+      quantity: 1
     }
+  ];
+  private isOrder: boolean;
+
+  constructor(private http: Http) {
+  }
+
+  public addCurrentOrders(menu) {
+      let found = false;
+      for(let orderedMenu of this.currentOrders){
+          if(menu.id == orderedMenu.id){
+                found = true;
+             orderedMenu.quantity +=1;
+          }
+      }
+      if(found == false){
+          let newMenu = {
+            id: menu.id,
+            name: menu.name,
+            price: menu.price,
+            quantity: 1
+          }
+          this.currentOrders.push(newMenu);
+      }
+  }
+
+  public getCurrentOrders() {
+    return this.currentOrders;
+  }
+
+  public clearCurrentOrders() {
+    this.currentOrders = [];
+  }
+
+   calTotalPrice() {
+    var totalPrice: number = 0;
+    for (var menuList of this.currentOrders) {
+      totalPrice += menuList.price * menuList.quantity;
+    }
+    return totalPrice
+  }
+
+  calTotalQuantity() {
+    var totalQuantity: number = 0;
+    for (var menuList of this.currentOrders) {
+      totalQuantity += menuList.quantity;
+    }
+    return totalQuantity
+  }
+
 
      public addOrderList(orderList){
         let headers = new Headers({'Content-Type': 'application/json'});
@@ -57,4 +126,12 @@ export class OrderService {
 
     }
 
+     public setOrderStatus(status: boolean) {
+      this.isOrder = status;
+    }
+
+    public getOrderStatus() {
+      return this.isOrder;
+    }
+    
 }

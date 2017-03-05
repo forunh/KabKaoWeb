@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,Output,EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-body',
@@ -10,9 +10,9 @@ export class BodyComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(JSON.stringify(localStorage.getItem('user')));
   }
 
-  @Input() isOrder = false;
-  @Input() menuLists:Array<Object>;
+
 }
 

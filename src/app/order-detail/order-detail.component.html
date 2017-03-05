@@ -1,0 +1,36 @@
+
+<div class="pad-left">
+  <h2>Order Detail</h2>
+  <strong>Order No.: </strong>{{orderListData.id}}
+  <br>
+  <strong>Order Time: </strong>{{toDateString(orderListData.createAt)}}  
+  <br>
+  <strong>Name: </strong>{{ getUser().first_name }} {{ getUser().last_name }}
+  <br> 
+  <strong>Email: </strong>{{ getUser().email }}
+  <br>  
+  <strong>Address: </strong>{{orderListData.address}}
+  <br>  
+  <strong>Menu:</strong>
+  <div>
+    <table>
+      <tr>
+        <th>Menu</th>
+        <th>Price</th>
+        <th>Quantity</th>
+      </tr>
+      <tr *ngFor="let orderMenu of orderMenuData ">
+        <td>{{orderMenu.menuId}}</td>
+        <td>300</td>
+        <td>{{orderMenu.quantity}}</td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <strong>Total Quantity: </strong>{{calTotalQuantity()}}
+  <br>
+  <strong>Total Price: </strong>{{orderListData.price}}
+  <br>
+  <button class="btn btn-primary" (click)="onClickOrderDetailDone()" >OK</button>
+  
+</div>
