@@ -6,11 +6,12 @@ import {OrderComponent} from "./order/order.component";
 import {MapComponent} from "./map/map.component";
 import {AuthGuard} from "./service/auth-guard.service";
 import {BlankComponent} from "./blank.component";
-import {OrderBodyComponent} from './order-body/order-body.component'
+import {OrderBodyComponent} from './order-body/order-body.component';
+import {MenuAdminComponent} from './menu-admin/menu-admin.component';
 
 
 const APP_ROUTES: Routes = [
-  { path: '', component: MapComponent,
+  { path: '', component: MenuAdminComponent,
     canActivate: [AuthGuard]},
   { path: '#', component: BlankComponent},
   { path: 'test', component: MenubarComponent},
