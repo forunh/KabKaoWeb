@@ -14,7 +14,8 @@ export class ModalComponent implements OnInit {
   }
 
   @ViewChild('childModal') public childModal:ModalDirective;
-  @Input() title:String;
+  @Input() title: String;
+  @Input('modal-size') size: string;
 
   public showChildModal():void {
     this.childModal.show();
@@ -23,5 +24,4 @@ export class ModalComponent implements OnInit {
   public hideChildModal():void {
     this.childModal.hide();
   }
-
 }
