@@ -137,12 +137,6 @@ export class OrderService {
     }
 
 
-     public setOrderStatus(status: boolean) {
-      this.isOrder = status;
-    }
-
-  }
-
   public getAllOrderMenu() {
     return this.http.get(this.url + '/orderMenu').map((res: Response) => res.json());
 
