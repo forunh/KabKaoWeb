@@ -35,7 +35,7 @@
           </popover-content>
           <a [popover]="myPopover">hi {{getUser().first_name}}</a>
         </li>
-        <!--<li (click)="logout()"><a>Log out</a></li>-->
+        <li *ngIf="!getUser()" (click)="logout()"><a>Log out</a></li>
       </ul>
     </div>
   </div>
