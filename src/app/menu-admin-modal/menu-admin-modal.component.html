@@ -4,15 +4,15 @@
       <label for="name">Title</label>
       <input type="text" class="form-control" id="name" [(ngModel)]="name" placeholder="Title" [ngModelOptions]="{standalone: true}">
     </div>
-    <div class="form-group">
-      <label for="description">Title</label>
+    <div [hidden]='isTopping' class="form-group">
+      <label for="description">Description</label>
       <input type="text" class="form-control" id="description" [(ngModel)]="description" placeholder="Description" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
-      <label for="price">Title</label>
+      <label for="price">Price</label>
       <input type="text" class="form-control" id="price" [(ngModel)]="price"  placeholder="Price" [ngModelOptions]="{standalone: true}">
     </div>
-    <div class="form-group">
+    <div [hidden]='isTopping' class="form-group">
       <label for="pic">Upload Picture</label>
       <input type="file" id="pic" (change)="picChange($event)">
     </div>
