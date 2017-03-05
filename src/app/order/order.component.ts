@@ -112,8 +112,8 @@ export class OrderComponent implements OnInit {
       );
   }
 
-  private toDateString(utcDate){
-    return new Date(utcDate).toDateString()+new Date(utcDate).toTimeString()
+   private toDateString(utcDate){
+    return new Date(utcDate).toDateString()+" "+new Date(utcDate).toTimeString().substring(0, 8)
   }
 
   private selectAddress(lat:Number,lng:Number){
@@ -123,6 +123,7 @@ export class OrderComponent implements OnInit {
   }
 
   private clearOrder(){
+    this.orderService.clearCurrentOrders();
     this.menuLists = null;
   }
 

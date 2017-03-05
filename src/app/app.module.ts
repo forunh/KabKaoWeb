@@ -21,6 +21,7 @@ import {OrderDetailComponent} from './order-detail/order-detail.component'
 import { BlankComponent } from './blank.component';
 import {OrderBodyComponent} from './order-body/order-body.component'
 import {SignUpComponent} from './signup/signup.component';
+import {HistoryComponent} from './history/history.component';
 
 //service
 import {OrderService} from './service/order.service';
@@ -28,6 +29,7 @@ import {UserService} from "./service/user.service";
 import {AuthGuard} from "./service/auth-guard.service";
 import {GgMapService} from './service/gg-map.service';
 import {DeliveryService} from './service/delivery.service';
+import { KitchenOrderComponent } from './kitchen-order/kitchen-order.component';
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 import { MenuAdminModalComponent } from './menu-admin-modal/menu-admin-modal.component';
 
@@ -46,7 +48,9 @@ import { MenuAdminModalComponent } from './menu-admin-modal/menu-admin-modal.com
         OrderBodyComponent,
         SignUpComponent,
         MenuAdminComponent,
-        MenuAdminModalComponent
+        MenuAdminModalComponent,
+        HistoryComponent,
+        KitchenOrderComponent,
     ],
     imports: [
         BrowserModule,

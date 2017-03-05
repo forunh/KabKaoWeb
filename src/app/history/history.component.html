@@ -1,0 +1,30 @@
+<div class="pad-left" *ngIf="getUser()">
+      <h2>Order History</h2>
+      <div class="pad-left">
+        <strong> Name:</strong> {{ getUser().first_name }} {{ getUser().last_name }} <br>
+        <strong> Email:</strong> {{ getUser().email }} <br>
+      </div>
+      <br>
+      <div *ngIf="isLoading">Loading...</div>
+      <table *ngIf="!isLoading">
+        <tr>
+          <th>OrderId</th>
+          <th>Menu</th>
+          <th>Price</th>
+          <th>Order Date</th>
+          <th>Status</th>
+        </tr>
+        <tr *ngFor="let order of allOrder">
+          <td>{{order.id}}</td>
+          <td>
+            <!--<table>-->
+            <tr><th>Menu Id</th><th>Quantity</th><tr>
+            <tr *ngFor="let menu of order.orderMenus"><td>{{menu.menuId}}</td><td> {{menu.quantity}}</td></tr>
+            <!--</table>-->
+          </td>
+          <td>{{order.price}}</td>
+          <td>{{toDateString(order.createAt)}}</td>
+          <td>success</td>          
+        </tr>
+      </table>
+  </div>
