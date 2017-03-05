@@ -42,14 +42,7 @@ export class OrderComponent implements OnInit {
 
   private createOrder(){
       this.isLoading = true;
-      let orderList = {
-        id:null,
-        userId:this.getUser().id,
-        price:this.totalPrice,
-        address:this.address,
-        createAt:null
-      };
-
+      
       let menu:Array<Object>=new Array<Object>();
       for(let menuList of this.menuLists){
         menu.push(
@@ -59,35 +52,37 @@ export class OrderComponent implements OnInit {
           }
         );
       }
+      let order = {
+        id:null,
+        userId:this.getUser().id,
+        price:this.totalPrice,
+        address:this.address,
+        createAt:null,
+        orderMenus: menu
+      };
 
-      this.orderService.addOrderList(orderList)
+
+      this.orderService.addOrder(order)
       .subscribe(
           data => {
-            this.orderListData = data;
-            // console.log(data)
-            let orderMenuList = {
-              orderId: data.id,
-              menuList: menu
+            this.orderListData = {
+              id:data.id,
+              address:data.address,
+              createAt:data.createAt,
+              price:data.price,
+              userId:data.userId
             }
-             this.orderService.addOrderMenuList(orderMenuList)
-            .subscribe(
-                data => {
-                  this.orderMenuData = data
-                  console.log(data)
-                  this.isLoading = false;
-                  let newEvent = {
-                    orderListData:this.orderListData,
-                    orderMenuData:this.orderMenuData
-                  }
-                  this.onOrderSent.emit(newEvent);
-                  this.orderService.setOrderStatus(false);
-                  this.clearOrder();
-                },
-                error => {
-                  this.isLoading = false;
-                  console.error("Error adding orderMenu!")
-                }
-            );
+            this.orderMenuData = data.orderMenus;
+            // console.log(this.orderMenuData)            
+            this.isLoading = false;
+            let newEvent = {
+              orderListData:this.orderListData,
+              orderMenuData:this.orderMenuData
+            }
+            this.onOrderSent.emit(newEvent);
+            this.orderService.setOrderStatus(false);
+            this.clearOrder();
+            
           },
           error => {
             this.isLoading = false;
