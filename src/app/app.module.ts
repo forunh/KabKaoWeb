@@ -30,6 +30,8 @@ import {AuthGuard} from "./service/auth-guard.service";
 import {GgMapService} from './service/gg-map.service';
 import {DeliveryService} from './service/delivery.service';
 import { KitchenOrderComponent } from './kitchen-order/kitchen-order.component';
+import { MenuAdminComponent } from './menu-admin/menu-admin.component';
+import { MenuAdminModalComponent } from './menu-admin-modal/menu-admin-modal.component';
 import {MenuNameService} from './service/menu-name.service';
 
 @NgModule({
@@ -45,8 +47,10 @@ import {MenuNameService} from './service/menu-name.service';
         BlankComponent,
         OrderBodyComponent,
         SignUpComponent,
+        MenuAdminComponent,
+        MenuAdminModalComponent,
         HistoryComponent,
-        KitchenOrderComponent
+        KitchenOrderComponent,
     ],
     imports: [
         BrowserModule,
