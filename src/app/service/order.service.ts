@@ -9,28 +9,9 @@ import {MenuOrder} from '../model/menuOrder'
 @Injectable()
 export class OrderService {
 
-  private url = 'http://52.187.62.107:10510';
+  private url = 'http://kabkao-order-service-worker-1.ap-southeast-1.elasticbeanstalk.com';
 
-  private currentOrders: Array<MenuOrder> = [
-    {
-      id: 15,
-      name: "ข้าวผัด",
-      price: 40,
-      quantity: 1
-    },
-    {
-      id: 23,
-      name: "ข้าวกระเพรา",
-      price: 80,
-      quantity: 2
-    },
-    {
-      id: 65,
-      name: "ข้าวต้ม",
-      price: 30,
-      quantity: 1
-    }
-  ];
+  private currentOrders: Array<MenuOrder> = [];
   private isOrder: boolean;
 
   constructor(private http: Http) {
