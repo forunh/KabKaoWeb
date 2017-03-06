@@ -86,7 +86,7 @@ export class MenuAdminComponent implements OnInit {
   }
 
   public removeMenu(id:number, index:number){
-    this.http.delete(this.url + "/remove/menu?id=" + id).map(res => res.json()).subscribe(data => {
+    this.http.delete(this.url + "/remove/menu?id=" + id, {headers: new Headers({'Authorization': this.userService.getUserToken()})}).map(res => res.json()).subscribe(data => {
       if(data.success == true){
         console.log(this.menuList);
         this.menuList.splice(index, 1);
@@ -100,7 +100,7 @@ export class MenuAdminComponent implements OnInit {
   }
 
   public removeTopping(id:number, index:number){
-    this.http.delete(this.url + "/remove/topping?id=" + id).map(res => res.json()).subscribe(data => {
+    this.http.delete(this.url + "/remove/topping?id=" + id, {headers: new Headers({'Authorization': this.userService.getUserToken()})}).map(res => res.json()).subscribe(data => {
       if(data.success == true){
         console.log(this.toppingList);
         this.toppingList.splice(index, 1);
