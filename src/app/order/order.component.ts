@@ -6,6 +6,7 @@ import { GgMapService} from '../service/gg-map.service';
 import { DeliveryService} from '../service/delivery.service';
 import {MenuOrder} from '../model/menuOrder'
 import {UserService} from "../service/user.service";
+import {MenuNameService} from '../service/menu-name.service'
 
 @Component({
   selector: 'app-order',
@@ -30,7 +31,11 @@ export class OrderComponent implements OnInit {
   menuPrice=0;
   deliveryPrice=0;
 
-  constructor(private orderService: OrderService,private ggMapService:GgMapService,private deliveryService: DeliveryService, private userService: UserService) {
+  constructor(private orderService: OrderService,private ggMapService:GgMapService,private deliveryService: DeliveryService,
+   private userService: UserService,
+   private menuNameService:MenuNameService
+  
+  ) {
     this.menuLists = orderService.getCurrentOrders();
 
    }
@@ -160,6 +165,23 @@ export class OrderComponent implements OnInit {
       return this.userService.getMyUserData();
   }
 
+  private getMenu(id){
+     this.menuNameService.getMenuById(id)
+      .subscribe(
+          data => {
+            if (data.success)
+              return data.payload
+            else
+              return null
+            // console.log(data)
+
+          },
+          error => {
+            console.error("Error search address!")
+            return null
+          }
+      );
+  }
 
 
 }

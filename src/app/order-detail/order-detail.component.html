@@ -1,5 +1,5 @@
 
-<div class="pad-left">
+<div class="pad-left" *ngIf="orderMenuData&&menu.length==orderMenuData.length">
   <h2>Order Detail</h2>
   <strong>Order No.: </strong>{{orderListData.id}}
   <br>
@@ -12,16 +12,16 @@
   <strong>Address: </strong>{{orderListData.address}}
   <br>  
   <strong>Menu:</strong>
-  <div>
+  <div >
     <table>
       <tr>
         <th>Menu</th>
         <th>Price</th>
         <th>Quantity</th>
       </tr>
-      <tr *ngFor="let orderMenu of orderMenuData ">
-        <td>{{orderMenu.menuId}}</td>
-        <td>300</td>
+      <tr *ngFor="let orderMenu of menu;  ">
+        <td>{{orderMenu.name}}</td>
+        <td>{{orderMenu.price}}</td>
         <td>{{orderMenu.quantity}}</td>
       </tr>
     </table>
